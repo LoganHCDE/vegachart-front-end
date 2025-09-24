@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+    <!-- Tailwind + Inter font -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e5e7eb;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1f2937;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+      }
+
+      /* Shared component styles */
+      .component-content {
+        max-height: none;
+        overflow: visible;
+        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          padding 0.5s ease-in-out;
+        padding: 1rem;
+      }
+      .component-header {
+        user-select: none;
+      }
+      .chevron-icon {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      /* Neon focus accents */
+      .neon-focus-green:focus-within {
+        box-shadow: 0 0 5px #34d399, 0 0 10px #34d399, 0 0 15px #34d399;
+      }
+      .neon-focus-blue:focus-within {
+        box-shadow: 0 0 5px #60a5fa, 0 0 10px #60a5fa, 0 0 15px #60a5fa;
+      }
+
+      /* Active nav link */
+      .nav-active {
+        color: #34d399 !important;
+        font-weight: 600;
+        border-bottom: 2px solid #34d399;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Top Navigation -->
+    <nav class="w-full bg-gray-950 border-b border-gray-800 mb-6">
+      <div
+        class="max-w-7xl mx-auto h-14 flex items-center justify-between px-4"
+      >
+        <a href="chart.html" class="flex items-center space-x-3">
+          <div
+            class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center"
+          >
+            <img src="logo.svg" alt="Logo" class="w-6 h-6" />
+          </div>
+          <span class="text-xl font-bold text-gray-100">
+            Vega <span class="text-emerald-400">Chart</span>
+          </span>
+        </a>
+        <div class="flex items-center space-x-6">
+          <a
+            href="chart.html"
+            class="text-gray-300 hover:text-emerald-400 font-medium transition"
+          >
+            Build
+          </a>
+          <a
+            href="guide.html"
+            class="text-gray-300 hover:text-emerald-400 font-medium transition"
+          >
+            Guide
+          </a>
+          
+          <a
+            href="feedback.html"
+            class="text-gray-300 hover:text-emerald-400 font-medium transition"
+          >
+            Feedback
+          </a>
+          <a
+            href="about.html"
+            class="text-gray-300 hover:text-emerald-400 font-medium transition"
+          >
+            About
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  <div class="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
+  <main class="max-w-5xl mx-auto">
+      <!-- Page Header (Updated) -->
+      <header class="mb-10 text-left">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-100">
+          Feedback
+        </h1>
+  <p class="text-sm text-gray-400 mt-6">
+          This feedback helps us improve Vega Chart. Please tell us about usability, bugs, performance, and any new feature suggestions.
+        </p>
+      </header>
+
+      <!-- Feedback Form -->
+      <form id="feedback-form" class="space-y-6" novalidate>
+        <!-- Quantitative Section -->
+        <section
+          class="component bg-gray-900 border border-gray-700 rounded-xl"
+        >
+          <div
+            class="component-header flex items-center justify-between p-4 bg-gray-800/50"
+          >
+            <h2 class="text-lg font-semibold text-emerald-400">
+              Multiple Choice
+            </h2>
+          </div>
+          <div class="component-content grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Overall Satisfaction -->
+            <fieldset>
+              <legend
+                class="block text-sm font-medium text-gray-300 mb-2"
+              >
+                How satisfied are you with the graph you created today?
+                <span class="text-gray-500">(1 = Very poor, 5 = Excellent)</span>
+              </legend>
+              <div class="flex items-center gap-3">
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="satisfaction"
+                    value="1"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                    required
+                  />
+                  <span class="text-sm text-gray-300">1</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="satisfaction"
+                    value="2"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">2</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="satisfaction"
+                    value="3"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">3</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="satisfaction"
+                    value="4"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">4</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="satisfaction"
+                    value="5"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">5</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Comparative experience -->
+            <fieldset>
+              <legend class="block text-sm font-medium text-gray-300 mb-2">
+                How would you compare creating a chart with Vega Chart versus your usual method?
+              </legend>
+              <div class="flex flex-wrap items-center gap-4">
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="comparison" value="much_better" class="text-emerald-500 focus:ring-emerald-500" required />
+                  <span class="text-sm text-gray-300">Much Better</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="comparison" value="slightly_better" class="text-emerald-500 focus:ring-emerald-500" />
+                  <span class="text-sm text-gray-300">Better</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="comparison" value="no_difference" class="text-emerald-500 focus:ring-emerald-500" />
+                  <span class="text-sm text-gray-300">Equal</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="comparison" value="slightly_worse" class="text-emerald-500 focus:ring-emerald-500" />
+                  <span class="text-sm text-gray-300">Worse</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="comparison" value="much_worse" class="text-emerald-500 focus:ring-emerald-500" />
+                  <span class="text-sm text-gray-300">Much Worse</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Performance -->
+            <fieldset>
+              <legend
+                class="block text-sm font-medium text-gray-300 mb-2"
+              >
+                How satisfied are you with the available customization options for graphs?
+                <span class="text-gray-500">(1 = Very poor, 5 = Excellent)</span>
+              </legend>
+              <div class="flex items-center gap-3">
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="customization"
+                    value="1"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                    required
+                  />
+                  <span class="text-sm text-gray-300">1</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="customization"
+                    value="2"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">2</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="customization"
+                    value="3"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">3</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="customization"
+                    value="4"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">4</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="customization"
+                    value="5"
+                    class="text-emerald-500 focus:ring-emerald-500"
+                  />
+                  <span class="text-sm text-gray-300">5</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Bugs Experienced -->
+            <fieldset>
+              <legend class="block text-sm font-medium text-gray-300 mb-2">
+                Did you experience any bugs while using the site?
+              </legend>
+              <div class="flex items-center gap-4">
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="bugs_experienced" value="yes" class="text-emerald-500 focus:ring-emerald-500" required />
+                  <span class="text-sm text-gray-300">Yes</span>
+                </label>
+                <label class="inline-flex items-center gap-2">
+                  <input type="radio" name="bugs_experienced" value="no" class="text-emerald-500 focus:ring-emerald-500" />
+                  <span class="text-sm text-gray-300">No</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- Qualitative Section -->
+        <section
+          class="component bg-gray-900 border border-gray-700 rounded-xl"
+        >
+          <div
+            class="component-header flex items-center justify-between p-4 bg-gray-800/50"
+          >
+            <h2 class="text-lg font-semibold text-emerald-400">
+              Open Feedback
+            </h2>
+          </div>
+          <div class="component-content grid grid-cols-1 gap-5">
+            <div class="neon-focus-blue rounded-lg transition-shadow">
+              <label class="block text-sm font-medium text-gray-300 mb-2"
+                >In what ways did the website support or fail to support you in building the graph you wanted?</label
+              >
+              <textarea
+                name="likeMost"
+                rows="3"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Tell us what stood out in a good way..."
+              ></textarea>
+            </div>
+
+            <div class="neon-focus-blue rounded-lg transition-shadow">
+              <label class="block text-sm font-medium text-gray-300 mb-2"
+                >What could be improved?</label
+              >
+              <textarea
+                name="improve"
+                rows="3"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Share any rough edges, confusing flows, or missing polish..."
+              ></textarea>
+            </div>
+
+            <div class="neon-focus-blue rounded-lg transition-shadow">
+              <label class="block text-sm font-medium text-gray-300 mb-2"
+                >If you encountered a bug, can you describe what happened?</label
+              >
+              <textarea
+                name="bugs"
+                rows="3"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="What happened, and how can we reproduce it?"
+              ></textarea>
+            </div>
+
+            <div class="neon-focus-blue rounded-lg transition-shadow">
+              <label class="block text-sm font-medium text-gray-300 mb-2"
+                >Feature requests</label
+              >
+              <textarea
+                name="features"
+                rows="3"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="What would make Vega Chart significantly more useful for you?"
+              ></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Optional Contact -->
+        <section
+          class="component bg-gray-900 border border-gray-700 rounded-xl"
+        >
+          <div
+            class="component-header flex items-center justify-between p-4 bg-gray-800/50"
+          >
+            <h2 class="text-lg font-semibold text-emerald-400">
+              Optional Contact
+            </h2>
+          </div>
+          <div class="component-content grid grid-cols-1 gap-4">
+            <div class="neon-focus-green rounded-lg transition-shadow">
+              <label for="email" class="block text-sm font-medium text-gray-300"
+                >Email (optional)</label
+              >
+              <input
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                class="mt-2 w-full bg-gray-800 border border-gray-600 rounded-md p-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+              <p class="text-xs text-gray-500 mt-2">
+                Only if you’d like us to follow up. We’ll never share your
+                email.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Final Open-Ended Question -->
+        <section
+          class="component bg-gray-900 border border-gray-700 rounded-xl"
+        >
+          <div
+            class="component-header flex items-center justify-between p-4 bg-gray-800/50"
+          >
+            <h2 class="text-lg font-semibold text-emerald-400">
+              Anything else you’d like to share?
+            </h2>
+          </div>
+          <div class="component-content">
+            <div class="neon-focus-blue rounded-lg transition-shadow">
+              <textarea
+                name="anythingElse"
+                rows="4"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Anything else you want to share with us?"
+              ></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Submit Row -->
+        <div class="flex items-center justify-end gap-3">
+          <button
+            type="reset"
+            class="text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            id="submit-btn"
+            type="submit"
+            class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center gap-2 transition-colors"
+          >
+            <svg
+              id="submit-check"
+              class="w-5 h-5 hidden"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+            <span>Submit Feedback</span>
+          </button>
+        </div>
+
+        <!-- Thank You Alert -->
+        <div
+          id="thank-you"
+          class="hidden mt-4 rounded-lg border border-emerald-700 bg-emerald-900/30 p-4 text-emerald-300"
+          role="status"
+        >
+          Thank you! Your feedback has been recorded.
+        </div>
+      </form>
+    </main>
+    </div>
+
+    <script>
+      // Simple client-side handler (no backend wired)
+          document
+            .getElementById("feedback-form")
+            .addEventListener("submit", function (e) {
+              e.preventDefault();
+
+              const submitBtn = document.getElementById("submit-btn");
+              const thankYou = document.getElementById("thank-you");
+              const submitCheck = document.getElementById("submit-check");
+
+              submitBtn.disabled = true;
+              submitBtn.classList.add("opacity-70", "cursor-not-allowed");
+              // Reveal the checkmark once user submits
+              if (submitCheck) submitCheck.classList.remove("hidden");
+
+          // Simulate a send; replace with your own fetch() to your backend
+          setTimeout(() => {
+            thankYou.classList.remove("hidden");
+
+            // Optionally reset the form after submit
+            e.target.reset();
+
+            // Re-enable button after a moment
+            setTimeout(() => {
+              submitBtn.disabled = false;
+              submitBtn.classList.remove("opacity-70", "cursor-not-allowed");
+            }, 1200);
+          }, 500);
+        });
+
+      // --- Auto-detect active nav link ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll("nav a");
+        const currentPath = window.location.pathname;
+
+        navLinks.forEach((link) => {
+          const linkPath = new URL(link.href).pathname;
+          if (linkPath === currentPath) {
+            link.classList.add("nav-active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

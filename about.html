@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+    <!-- Tailwind + Inter font -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e5e7eb;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #1f2937; }
+      ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+      /* Shared component styles */
+      .component { background-color: #111827; border: 1px solid #374151; }
+      .component-header { user-select: none; }
+      .component-content { padding: 1rem; }
+
+      /* Lighter text for placeholder selects */
+      .select-placeholder { color: #9ca3af !important; }
+
+      /* (Navbar starfield removed on this page by request) */
+    </style>
+  </head>
+
+  <body>
+    <!-- Top Navigation -->
+    <nav class="w-full bg-gray-950 border-b border-gray-800 mb-6">
+      <div class="max-w-7xl mx-auto h-14 flex items-center justify-between px-4">
+        <a href="chart.html" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+            <img src="logo.svg" alt="Logo" class="w-6 h-6" />
+          </div>
+          <span class="text-xl font-bold text-gray-100">Vega <span class="text-emerald-400">Chart</span></span>
+        </a>
+        <div class="flex items-center space-x-6">
+          <a href="chart.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Build</a>
+          <a href="guide.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Guide</a>
+          
+          <a href="feedback.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Feedback</a>
+          <a href="about.html" class="text-emerald-400 font-semibold border-b-2 border-emerald-400">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
+      <main class="max-w-7xl mx-auto">
+        <!-- Title -->
+        <header class="mb-10 text-center">
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-100">About</h1>
+        </header>
+      <!-- Content Grid -->
+      <section class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <!-- Left content -->
+        <div class="lg:col-span-3 space-y-12">
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h2 class="text-lg font-semibold text-blue-400">What is Vega Chart?</h2>
+            </div>
+            <div class="component-content">
+              <p class="text-gray-300 leading-relaxed">
+                Vega chart provides a powerful, web-based tool for rapidly generating custom graphs. Built on top of industry-standard coding libraries, Vega chart builds your chart for you, eliminates the need for coding expertise. (Although you might learn a little about coding along the way!)
+              </p>
+            </div>
+          </article>
+
+          <!-- New Component: No Coding Needed -->
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h2 class="text-lg font-semibold text-emerald-400">Do I need to know how to code in order to use this tool?</h2>
+            </div>
+            <div class="component-content text-gray-300 space-y-3">
+              <p>Not at all! This tool is designed so anyone can create charts quickly, no coding required.</p>
+              <p>To generate graphs, Vega Chart is powered by popular coding libraries like Ggplot2 in R and Seaborn in Python. You can learn more about the programming libraries used in our <a href="guide.html" class="text-emerald-400 hover:text-emerald-300">guide</a>.</p> 
+              <p>If you're curious, you can view the code for every chart you make, and maybe even learn some programming along the way!</p>
+            </div>
+          </article>
+
+          </div>
+          
+        <!-- Right content (image) placed alongside intro components -->
+        <aside class="lg:col-span-2 space-y-6 self-stretch">
+          <div class="bg-gray-900 border border-gray-700 rounded-xl p-4 flex items-center justify-center h-full">
+            <img src="vega%20chart%20chart.png" alt="Vega Chart example" class="w-full h-full object-contain rounded-lg" />
+          </div>
+        </aside>
+
+          <article class="component rounded-xl lg:col-span-5">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h2 class="text-lg font-semibold text-blue-400">How do I use Vega Chart?</h2>
+            </div>
+            <div class="component-content space-y-4 text-gray-300">
+              <div class="space-y-2">
+                <h3 class="font-semibold text-gray-100">Step 1: Choose a dataset</h3>
+                <p>You can use any dataset in common formats like CSV or XLSX.<br>
+                Don't have one handy? You can use the <a href="vega_chart.csv" download class="text-blue-400 hover:text-blue-300">sample dataset</a> used to create this graph!</p>
+              </div>
+              <div class="space-y-2">
+                <h3 class="font-semibold text-gray-100">Step 2: Select your data</h3>
+                <p>Decide which columns from your dataset you want to plot on the x-axis and y-axis.<br>
+                After you choose, select whether your data is continuous or discrete:</p>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                  <li><span class="font-medium">Continuous data:</span> Values that can take on any number within a range (e.g., height, temperature, time).</li>
+                  <li><span class="font-medium">Discrete data:</span> Values that are countable and separate (e.g., number of items, categories, yes/no responses).</li>
+                </ul>
+              </div>
+              <div class="space-y-2">
+                <h3 class="font-semibold text-gray-100">Step 3: Create your chart</h3>
+                <p>Now it's time to bring your data to life. Start by choosing the type of chart that best fits your data. If you're unsure what chart to use you can always check our <a href="guide.html" class="text-emerald-400 hover:text-emerald-300">guide</a> for help. Once you've selected a chart, decide what information you want it to display. From there, you can customize the look by adjusting the color gradient, adding a legend, and setting labels for different chart features.</p>
+              </div>
+              <div class="space-y-2">
+                <h3 class="font-semibold text-gray-100">Step 4: Generate your chart</h3>
+                <p>Click Generate to create your chart and see it on the screen. You can also view the code that powers it. When you're ready, press <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="inline-block align-text-bottom w-5 h-5 text-gray-300" aria-hidden="true" focusable="false"><rect x="9" y="9" width="10" height="10" rx="2"/><rect x="5" y="5" width="10" height="10" rx="2"/></svg> to copy or press <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="inline-block align-text-bottom w-5 h-5 text-gray-300" aria-hidden="true" focusable="false"><rect x="1" y="1" width="22" height="22" rx="3"/><path d="M12 3v10"/><path d="M8 9l4 4 4-4"/><rect x="4" y="17" width="16" height="4" rx="2"/></svg> to download the chart.</p>
+              </div>
+            </div>
+          </article>
+
+          
+
+        
+
+        <!-- Full-width: Who created Vega Chart? -->
+        <div class="lg:col-span-5 component rounded-xl">
+          <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+            <h2 class="text-lg font-semibold text-emerald-400">Who created Vega Chart?</h2>
+          </div>
+          <div class="component-content">
+            <p class="text-gray-300 leading-relaxed">
+              Vega Chart is an open-source project created by Logan Tuttle, a student at the University of Washington studying UX Research & Design with a minor in Data Science.
+            </p>
+            <p class="text-gray-300 leading-relaxed mt-3">
+              If you've enjoyed using Vega Chart and appreciate the design and user experience, consider recommending Logan for UX opportunities or inviting him to join your team. You can connect with him through the contact form below, and visit his <a href="https://www.linkedin.com/in/uw-logan-tuttle/" class="text-blue-400 hover:text-blue-300" target="_blank" rel="noopener">LinkedIn</a> or <a href="https://loganhcde.github.io/" class="text-blue-400 hover:text-blue-300" target="_blank" rel="noopener">portfolio website</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Full-width Contact card -->
+        <div class="lg:col-span-5 component rounded-xl">
+          <div class="component-header p-4 bg-gray-800/50 rounded-t-xl flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-blue-400">Contact</h3>
+          </div>
+          <div class="component-content">
+            <form id="about-contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                <select id="contact-reason" class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 select-placeholder">
+                  <option value="" selected>Select Topic</option>
+                  <option>Website Question</option>
+                  <option>Business Question</option>
+                  <option>I Want to Hire Logan</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input type="email" required placeholder="you@example.com" class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                <textarea rows="4" required class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="How can we help?"></textarea>
+              </div>
+              <div class="md:col-span-2 flex justify-end">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-emerald-500">Send</button>
+              </div>
+              <p id="about-contact-note" class="text-sm text-gray-400 hidden md:col-span-2">Thanks! We will get back to you soon.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('about-contact-form');
+        const note = document.getElementById('about-contact-note');
+        const reason = document.getElementById('contact-reason');
+        function toggleReasonPlaceholder() {
+          if (!reason) return;
+          if (reason.value === '') { reason.classList.add('select-placeholder'); }
+          else { reason.classList.remove('select-placeholder'); }
+        }
+        toggleReasonPlaceholder();
+        reason?.addEventListener('change', toggleReasonPlaceholder);
+        form?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (note) {
+            note.classList.remove('hidden');
+            note.textContent = 'Thanks! Your message has been noted.';
+          }
+        });
+      });
+    </script>
+  </body>
+ </html>

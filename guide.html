@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart Guide</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+
+    <!-- Tailwind + Inter font -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e5e7eb;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #1f2937; }
+      ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+      /* Shared component styles (match site) */
+      .component { background-color: #111827; border: 1px solid #374151; }
+      .component-header { user-select: none; }
+      .component-content { padding: 1rem; }
+
+      /* Simple gray placeholder block */
+      .placeholder {
+        background: #4b5563;
+        background-image: linear-gradient(135deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(225deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(45deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(315deg, #6b7280 25%, #4b5563 25%);
+        background-position: 10px 0, 10px 0, 0 0, 0 0;
+        background-size: 10px 10px;
+      }
+
+      .swatch { height: 16px; border-radius: 6px; }
+    </style>
+  </head>
+
+  <body>
+    <!-- Top Navigation -->
+    <nav class="w-full bg-gray-950 border-b border-gray-800 mb-6">
+      <div class="max-w-7xl mx-auto h-14 flex items-center justify-between px-4">
+        <a href="chart.html" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+            <img src="logo.svg" alt="Logo" class="w-6 h-6" />
+          </div>
+          <span class="text-xl font-bold text-gray-100">Vega <span class="text-emerald-400">Chart</span></span>
+        </a>
+        <div class="flex items-center space-x-6">
+          <a href="chart.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Build</a>
+          <a href="guide.html" class="text-emerald-400 font-semibold border-b-2 border-emerald-400">Guide</a>
+          
+          <a href="feedback.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Feedback</a>
+          <a href="about.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">About</a>
+        </div>
+      </div>
+    </nav>
+
+  <div class="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
+  <main id="chart-guide" class="max-w-7xl mx-auto space-y-14">
+      <!-- Title -->
+      <header class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-100">Chart Guide</h1>
+      </header>
+
+      <!-- Chart Types -->
+      <section id="chart-types" class="space-y-8">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold text-emerald-400">Chart Types</h2>
+          <p class="text-sm text-gray-400 mt-2">Descriptions for chart types and their use cases.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card Template repeated -->
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-gray-200">Scatter Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Shows relationship between two numeric variables. Look for clusters, outliers, and trends.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Line Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Continuous line across ordered x values. Use for progression or change over time.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Bar Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Compare categories with heights. Great for counts and aggregated values.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Box Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Summarizes distributions by category: median, quartiles, and outliers.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Violin Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Like a box plot but shows density across values for richer comparison.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Dot Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Displays individual observations or category values as points for simple comparison.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Pie Chart</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Shows part-to-whole composition. Use sparingly and with few slices.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Jitter Plot</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Adds random noise to reduce overlap when many points share similar positions.</p>
+            </div>
+          </article>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+              <h3 class="text-lg font-semibold text-gray-200">Bar Chart</h3>
+            </div>
+            <div class="component-content">
+              <div class="placeholder rounded-lg aspect-video w-full"></div>
+              <p class="text-xs text-gray-400 mt-3">Bar chart of category frequencies. Ideal for quick distributions of labels.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      
+
+      <!-- Programming Languages -->
+      <section id="programming-languages" class="space-y-8">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold text-emerald-400">Programming Languages (And Libraries)</h2>
+          <p class="text-sm text-gray-400 mt-2">Libraries Vega Chart generates for you.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="component rounded-xl text-center">
+            <div class="component-content space-y-4">
+              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+                <span class="text-xl" aria-hidden="true">JS</span>
+              </div>
+              <h3 class="font-semibold">JavaScript (Plotly)</h3>
+              <div class="flex justify-center gap-2">
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
+              </div>
+              <p class="text-xs text-gray-400">Interactive, responsive charts for the web with simple configuration.</p>
+            </div>
+          </div>
+
+          <div class="component rounded-xl text-center">
+            <div class="component-content space-y-4">
+              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+                <span class="text-xl" aria-hidden="true">Py</span>
+              </div>
+              <h3 class="font-semibold">Python (Seaborn)</h3>
+              <div class="flex justify-center gap-2">
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
+              </div>
+              <p class="text-xs text-gray-400">Built on matplotlib with beautiful defaults and statistical helpers.</p>
+            </div>
+          </div>
+
+          <div class="component rounded-xl text-center">
+            <div class="component-content space-y-4">
+              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+                <span class="text-xl" aria-hidden="true">R</span>
+              </div>
+              <h3 class="font-semibold">R (Ggplot2)</h3>
+              <div class="flex justify-center gap-2">
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
+                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
+              </div>
+              <p class="text-xs text-gray-400">Elegant grammar of graphics for layered plots and statistical summaries.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Practices -->
+      <section id="best-practices" class="space-y-8">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold text-emerald-400">Vega’s Best Chart & Data Practices</h2>
+        </div>
+
+        <!-- Practice rows -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #1</h3></div>
+            <div class="component-content">
+              <p class="text-gray-300 text-sm leading-relaxed">Use clear titles, axis labels, and source text. Keep color use purposeful and consistent with a palette that supports accessibility. Avoid clutter by removing non-essential gridlines, borders, and decorations.</p>
+            </div>
+          </article>
+          <div class="component rounded-xl p-4 flex items-center justify-center">
+            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center"> 
+              <span class="text-gray-300 text-sm">Illustration</span>
+            </div>
+          </div>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #2</h3></div>
+            <div class="component-content">
+              <p class="text-gray-300 text-sm leading-relaxed">Match the chart type to the question: bars for comparing categories, lines for change over ordered values, scatter for relationships. Summarize distributions with box or violin plots when you need to compare spread.</p>
+            </div>
+          </article>
+          <div class="component rounded-xl p-4 flex items-center justify-center">
+            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center">
+              <span class="text-gray-300 text-sm">Illustration</span>
+            </div>
+          </div>
+
+          <article class="component rounded-xl">
+            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #3</h3></div>
+            <div class="component-content">
+              <p class="text-gray-300 text-sm leading-relaxed">Annotate important values and use legends sparingly. When possible, label directly. Always include units, and ensure text contrast is high enough for readability on dark backgrounds.</p>
+            </div>
+          </article>
+          <div class="component rounded-xl p-4 flex items-center justify-center">
+            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center">
+              <span class="text-gray-300 text-sm">Illustration</span>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
+  </div>
+  </body>
+ </html>
