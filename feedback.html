@@ -464,43 +464,85 @@
         >
           Thank you! Your feedback has been recorded.
         </div>
+        <div
+          id="error-message"
+          class="hidden mt-4 rounded-lg border border-red-700 bg-red-900/30 p-4 text-red-300"
+          role="alert"
+        >
+          We couldn't submit your feedback. Please try again in a moment.
+        </div>
       </form>
     </main>
     </div>
 
     <script>
-      // Simple client-side handler (no backend wired)
-          document
-            .getElementById("feedback-form")
-            .addEventListener("submit", function (e) {
-              e.preventDefault();
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("feedback-form");
+        const submitBtn = document.getElementById("submit-btn");
+        const thankYou = document.getElementById("thank-you");
+        const submitCheck = document.getElementById("submit-check");
+        const errorBox = document.getElementById("error-message");
 
-              const submitBtn = document.getElementById("submit-btn");
-              const thankYou = document.getElementById("thank-you");
-              const submitCheck = document.getElementById("submit-check");
+        if (form && submitBtn) {
+          // Wire the feedback form to the Flask endpoint
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-              submitBtn.disabled = true;
-              submitBtn.classList.add("opacity-70", "cursor-not-allowed");
-              // Reveal the checkmark once user submits
+            if (thankYou) thankYou.classList.add("hidden");
+            if (errorBox) errorBox.classList.add("hidden");
+            if (submitCheck) submitCheck.classList.add("hidden");
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add("opacity-70", "cursor-not-allowed");
+
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            try {
+              const response = await fetch("/api/submit-feedback", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              });
+
+              const result = await response.json().catch(() => ({}));
+              const isObject = result && typeof result === "object";
+
+              if (!response.ok) {
+                const message = isObject && result.error
+                  ? result.error
+                  : "Unable to submit feedback right now.";
+                throw new Error(message);
+              }
+
               if (submitCheck) submitCheck.classList.remove("hidden");
+              if (thankYou) {
+                const successMessage = isObject && result.message
+                  ? result.message
+                  : "Thank you! Your feedback has been recorded.";
+                thankYou.textContent = successMessage;
+                thankYou.classList.remove("hidden");
+              }
 
-          // Simulate a send; replace with your own fetch() to your backend
-          setTimeout(() => {
-            thankYou.classList.remove("hidden");
-
-            // Optionally reset the form after submit
-            e.target.reset();
-
-            // Re-enable button after a moment
-            setTimeout(() => {
+              form.reset();
+            } catch (err) {
+              if (errorBox) {
+                const fallback = err && err.message
+                  ? err.message
+                  : "Something went wrong. Please try again later.";
+                errorBox.textContent = fallback;
+                errorBox.classList.remove("hidden");
+              }
+              console.error(err);
+            } finally {
               submitBtn.disabled = false;
               submitBtn.classList.remove("opacity-70", "cursor-not-allowed");
-            }, 1200);
-          }, 500);
-        });
+            }
+          });
+        }
 
-      // --- Auto-detect active nav link ---
-      document.addEventListener("DOMContentLoaded", () => {
         const navLinks = document.querySelectorAll("nav a");
         const currentPath = window.location.pathname;
 
