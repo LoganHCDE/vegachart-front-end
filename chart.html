@@ -4624,12 +4624,8 @@ ggplot(data, aes(category, value, fill = category)) +
 
           if (sourceText) {
             lines.push('');
-            lines.push('# Add source text');
-            if (showLegend && hasHue && (legendPos === 'Right' || legendPos === 'Outside Chart')) {
-              lines.push(`plt.figtext(0.01, 0.01, '${escapePyStr(sourceText)}', ha='left', va='bottom', fontsize=9, color='${__pyText}')`);
-            } else {
-              lines.push(`plt.figtext(0.99, 0.01, '${escapePyStr(sourceText)}', ha='right', va='bottom', fontsize=9, color='${__pyText}')`);
-            }
+            lines.push('# Add source text (always bottom-right)');
+            lines.push(`plt.figtext(0.99, 0.01, '${escapePyStr(sourceText)}', ha='right', va='bottom', fontsize=9, color='${__pyText}')`);
           }
           lines.push('');
           lines.push('# Format and display');
@@ -4641,29 +4637,8 @@ ggplot(data, aes(category, value, fill = category)) +
             lines.push('plt.gca().tick_params(axis="x", labelsize=9)');
             lines.push('plt.gca().tick_params(axis="y", labelsize=9)');
           }
-          // Smart watermark positioning: opposite side of source text
-          let watermarkX = '0.99';
-          let watermarkHA = 'right';
-          const watermarkY = '0.005'; // Keep at bottom position regardless of source text
-
-          if (sourceText) {
-            const sourceLeft = (showLegend && hasHue && (legendPos === 'Top Right' || legendPos === 'Right' || legendPos === 'Outside Chart'));
-            if (sourceLeft) {
-              // Source is on left -> place watermark on right
-              watermarkX = '0.99';
-              watermarkHA = 'right';
-            } else {
-              // Source is on right -> place watermark on left
-              watermarkX = '0.01';
-              watermarkHA = 'left';
-            }
-          } else {
-            // Default when no source: bottom-right
-            watermarkX = '0.99';
-            watermarkHA = 'right';
-          }
-
-          lines.push(`plt.figtext(${watermarkX}, ${watermarkY}, "Vegachart.com", ha="${watermarkHA}", va="bottom", fontsize=8, color="#9ca3af", alpha=0.7)`);
+          // Watermark always bottom-left to avoid overlapping source text
+          lines.push(`plt.figtext(0.01, 0.005, "Vegachart.com", ha="left", va="bottom", fontsize=8, color="#9ca3af", alpha=0.7)`);
           lines.push('plt.tight_layout(pad=1.5)');
           lines.push('plt.show()');
 
@@ -5475,8 +5450,10 @@ ggplot(data, aes(category, value, fill = category)) +
             // Chain labs() onto the existing ggplot object to avoid a stray trailing '+' on the previous line
             lines.push(`  labs(caption = "${escapeRStr(captionText)}")`);
           }
+
           lines.push('');
-          lines.push('# Plot will render automatically when you run this code');
+          lines.push('# Print the plot so the backend captures it');
+          lines.push('print(p)');
 
           return lines.join('\n');
         }

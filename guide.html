@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chart Guide</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg" />
-
-    <!-- Tailwind + Inter font -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <style>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chart Guide
+</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
+<!-- Tailwind + Inter font -->
+<script src="https://cdn.tailwindcss.com">
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"      rel="stylesheet"    />
+<style>
       body {
         font-family: "Inter", sans-serif;
         background-color: #0a0a0a;
@@ -44,237 +41,858 @@
       }
 
       .swatch { height: 16px; border-radius: 6px; }
-    </style>
-  </head>
 
-  <body>
-    <!-- Top Navigation -->
-    <nav class="w-full bg-gray-950 border-b border-gray-800 mb-6">
-      <div class="max-w-7xl mx-auto h-14 flex items-center justify-between px-4">
-        <a href="chart.html" class="flex items-center space-x-3">
-          <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-            <img src="logo.svg" alt="Logo" class="w-6 h-6" />
-          </div>
-          <span class="text-xl font-bold text-gray-100">Vega <span class="text-emerald-400">Chart</span></span>
-        </a>
-        <div class="flex items-center space-x-6">
-          <a href="chart.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Build</a>
-          <a href="guide.html" class="text-emerald-400 font-semibold border-b-2 border-emerald-400">Guide</a>
-          
-          <a href="feedback.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Feedback</a>
-          <a href="about.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">About</a>
-        </div>
-      </div>
-    </nav>
+      /* Programming languages readability tweaks */
+      .chart-preview {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 0.75rem;
+        border: 1px solid #1f2937;
+        background: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
 
-  <div class="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
-  <main id="chart-guide" class="max-w-7xl mx-auto space-y-14">
-      <!-- Title -->
-      <header class="text-center">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-100">Chart Guide</h1>
-      </header>
+      .chart-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-      <!-- Chart Types -->
-      <section id="chart-types" class="space-y-8">
-        <div class="text-center">
-          <h2 class="text-2xl font-semibold text-emerald-400">Chart Types</h2>
-          <p class="text-sm text-gray-400 mt-2">Descriptions for chart types and their use cases.</p>
-        </div>
+      .language-card .component-content {
+        padding: 1.5rem 1.75rem;
+      }
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Card Template repeated -->
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-200">Scatter Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Shows relationship between two numeric variables. Look for clusters, outliers, and trends.</p>
-            </div>
-          </article>
+      .language-card .language-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Line Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Continuous line across ordered x values. Use for progression or change over time.</p>
-            </div>
-          </article>
+      .language-card .language-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #d1d5db;
+        letter-spacing: 0.01em;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Bar Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Compare categories with heights. Great for counts and aggregated values.</p>
-            </div>
-          </article>
+      .language-card .language-description:first-child {
+        color: #f9fafb;
+        font-weight: 600;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Box Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Summarizes distributions by category: median, quartiles, and outliers.</p>
-            </div>
-          </article>
+      .language-card .language-logo svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Violin Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Like a box plot but shows density across values for richer comparison.</p>
-            </div>
-          </article>
+      .language-card .language-wordmark {
+        width: 9rem;
+        margin: 0 auto;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Dot Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Displays individual observations or category values as points for simple comparison.</p>
-            </div>
-          </article>
+      .language-card .language-wordmark svg,
+      .language-card .language-wordmark img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Pie Chart</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Shows part-to-whole composition. Use sparingly and with few slices.</p>
-            </div>
-          </article>
+      .language-card .language-wordmark.ggplot {
+        width: 6rem;
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Jitter Plot</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Adds random noise to reduce overlap when many points share similar positions.</p>
-            </div>
-          </article>
+      .language-card .language-wordmark.seaborn {
+        width: 12rem; /* 1.5x bigger than previous 8rem */
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
-              <h3 class="text-lg font-semibold text-gray-200">Bar Chart</h3>
-            </div>
-            <div class="component-content">
-              <div class="placeholder rounded-lg aspect-video w-full"></div>
-              <p class="text-xs text-gray-400 mt-3">Bar chart of category frequencies. Ideal for quick distributions of labels.</p>
-            </div>
-          </article>
-        </div>
-      </section>
+      /* Hide problematic inline SVG for Seaborn wordmark; use image instead */
+      .language-card .language-wordmark.seaborn svg {
+        display: none !important;
+      }
 
-      
+      :root {
+        --card-scale: 1.25;
+      }
 
-      <!-- Programming Languages -->
-      <section id="programming-languages" class="space-y-8">
-        <div class="text-center">
-          <h2 class="text-2xl font-semibold text-emerald-400">Programming Languages (And Libraries)</h2>
-          <p class="text-sm text-gray-400 mt-2">Libraries Vega Chart generates for you.</p>
-        </div>
+      .component {
+        border-radius: calc(0.75rem * var(--card-scale)) !important;
+      }
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="component rounded-xl text-center">
-            <div class="component-content space-y-4">
-              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
-                <span class="text-xl" aria-hidden="true">JS</span>
-              </div>
-              <h3 class="font-semibold">JavaScript (Plotly)</h3>
-              <div class="flex justify-center gap-2">
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
-              </div>
-              <p class="text-xs text-gray-400">Interactive, responsive charts for the web with simple configuration.</p>
-            </div>
-          </div>
+      .component-header,
+      .component-content {
+        padding: calc(1rem * var(--card-scale)) !important;
+      }
 
-          <div class="component rounded-xl text-center">
-            <div class="component-content space-y-4">
-              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
-                <span class="text-xl" aria-hidden="true">Py</span>
-              </div>
-              <h3 class="font-semibold">Python (Seaborn)</h3>
-              <div class="flex justify-center gap-2">
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
-              </div>
-              <p class="text-xs text-gray-400">Built on matplotlib with beautiful defaults and statistical helpers.</p>
-            </div>
-          </div>
+      .component .chart-preview {
+        border-radius: calc(0.75rem * var(--card-scale)) !important;
+        height: calc(12rem * var(--card-scale)) !important;
+      }
 
-          <div class="component rounded-xl text-center">
-            <div class="component-content space-y-4">
-              <div class="mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
-                <span class="text-xl" aria-hidden="true">R</span>
-              </div>
-              <h3 class="font-semibold">R (Ggplot2)</h3>
-              <div class="flex justify-center gap-2">
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">📄</div>
-                <div class="w-8 h-8 bg-gray-800 rounded-md flex items-center justify-center">🖼️</div>
-              </div>
-              <p class="text-xs text-gray-400">Elegant grammar of graphics for layered plots and statistical summaries.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      .component .chart-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-      <!-- Best Practices -->
-      <section id="best-practices" class="space-y-8">
-        <div class="text-center">
-          <h2 class="text-2xl font-semibold text-emerald-400">Vega’s Best Chart & Data Practices</h2>
-        </div>
+      .component .text-lg {
+        font-size: calc(1.125rem * var(--card-scale));
+        line-height: calc(1.75rem * var(--card-scale));
+      }
 
-        <!-- Practice rows -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #1</h3></div>
-            <div class="component-content">
-              <p class="text-gray-300 text-sm leading-relaxed">Use clear titles, axis labels, and source text. Keep color use purposeful and consistent with a palette that supports accessibility. Avoid clutter by removing non-essential gridlines, borders, and decorations.</p>
-            </div>
-          </article>
-          <div class="component rounded-xl p-4 flex items-center justify-center">
-            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center"> 
-              <span class="text-gray-300 text-sm">Illustration</span>
-            </div>
-          </div>
+      .component .text-xs {
+        font-size: calc(0.75rem * var(--card-scale));
+        line-height: calc(1.125rem * var(--card-scale));
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #2</h3></div>
-            <div class="component-content">
-              <p class="text-gray-300 text-sm leading-relaxed">Match the chart type to the question: bars for comparing categories, lines for change over ordered values, scatter for relationships. Summarize distributions with box or violin plots when you need to compare spread.</p>
-            </div>
-          </article>
-          <div class="component rounded-xl p-4 flex items-center justify-center">
-            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center">
-              <span class="text-gray-300 text-sm">Illustration</span>
-            </div>
-          </div>
+      .component .text-sm {
+        font-size: calc(0.875rem * var(--card-scale));
+        line-height: calc(1.375rem * var(--card-scale));
+      }
 
-          <article class="component rounded-xl">
-            <div class="component-header p-4 bg-gray-800/50 rounded-t-xl"><h3 class="text-lg font-semibold text-gray-200">Best practice #3</h3></div>
-            <div class="component-content">
-              <p class="text-gray-300 text-sm leading-relaxed">Annotate important values and use legends sparingly. When possible, label directly. Always include units, and ensure text contrast is high enough for readability on dark backgrounds.</p>
-            </div>
-          </article>
-          <div class="component rounded-xl p-4 flex items-center justify-center">
-            <div class="placeholder w-full h-44 rounded-lg flex items-center justify-center">
-              <span class="text-gray-300 text-sm">Illustration</span>
-            </div>
-          </div>
-        </div>
-      </section>
-  </main>
-  </div>
-  </body>
- </html>
+      .component .text-2xl {
+        font-size: calc(1.5rem * var(--card-scale));
+        line-height: calc(2rem * var(--card-scale));
+      }
+
+      .component .language-logo {
+        width: calc(3rem * var(--card-scale));
+        height: calc(3rem * var(--card-scale));
+      }
+
+      .component .language-wordmark {
+        width: calc(9rem * var(--card-scale));
+      }
+
+      .component .language-wordmark.ggplot {
+        width: calc(6rem * var(--card-scale));
+      }
+
+      .component .language-wordmark.seaborn {
+        width: calc(12rem * var(--card-scale));
+      }
+
+      .language-card .component-content {
+        padding: calc(1.5rem * var(--card-scale)) calc(1.75rem * var(--card-scale)) !important;
+      }
+</style>
+</head>
+<body>
+<!-- Top Navigation -->
+<nav class="w-full bg-gray-950 border-b border-gray-800 mb-6">
+<div class="max-w-7xl mx-auto h-14 flex items-center justify-between px-4">
+<a href="chart.html" class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+<img src="logo.svg" alt="Logo" class="w-6 h-6" />
+</div>
+<span class="text-xl font-bold text-gray-100">Vega <span class="text-emerald-400">Chart
+</span>
+</span>
+</a>
+<div class="flex items-center space-x-6">
+<a href="chart.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Build
+</a>
+<a href="guide.html" class="text-emerald-400 font-semibold border-b-2 border-emerald-400">Guide
+</a>
+<a href="feedback.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">Feedback
+</a>
+<a href="about.html" class="text-gray-300 hover:text-emerald-400 font-medium transition">About
+</a>
+</div>
+</div>
+</nav>
+<div class="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8">
+<main id="chart-guide" class="max-w-7xl mx-auto space-y-14">
+<!-- Title -->
+<header class="text-center">
+<h1 class="text-4xl sm:text-5xl font-extrabold text-gray-100">Chart Guide
+</h1>
+</header>
+<!-- Chart Types -->
+<section id="chart-types" class="space-y-8">
+<div class="text-center">
+<h2 class="text-2xl font-semibold text-emerald-400">Chart Types
+</h2>
+<p class="text-sm text-gray-400 mt-2">Descriptions for chart types and their use cases.
+</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card Template repeated -->
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl flex items-center justify-between">
+<h3 class="text-lg font-semibold text-gray-200">Scatter Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Scatter%20Plot.png"                  alt="Scatter plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Dots plot two variables to reveal correlations, clusters, or outliers.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Two continuous variables.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Highlights relationships and trends; flexible for large data with colors or trend lines; can include a line of best fit.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Overcrowds with dense points; no aggregation; needs expertise for interpretations.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Line Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Line%20Plot.png"                  alt="Line plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Connected lines track changes over ordered data like time for trend visualization.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Continuous x continuous; treats duplicates as points; ideal for sequences.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Clear for trends and progressions; easy multi-line overlays.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Assumes continuity and can mislead on sparse or discrete data; overwhelms with many lines.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Bar Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Bar%20Chart.png"                  alt="Bar chart example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Rectangular bars show categorical data values for easy group comparisons.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Categorical (discrete) x quantitative (discrete/continuous); aggregates duplicates by summing or counting.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Simple to compare categories; supports stacking for details; intuitive for totals.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Clutters with many categories; misleading for continuous trends; ignores distributions.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Box Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Box%20Plot.png"                  alt="Box plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Box and whiskers summarize distribution: median, quartiles, range, and outliers.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Duplicative discrete value x continuous.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Compares group distributions efficiently; robust to extremes; concise overview.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Hides data shape or multimodality; unclear for small datasets; less intuitive.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Violin Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Violin%20Plot.png"                  alt="Violin plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Density-shaped "violins" show data distribution and summary stats side-by-side.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Duplicative discrete value x continuous.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Reveals density, skewness, and modes; better than boxes for shape insights.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Complex to read; bandwidth-sensitive; needs larger data and many duplicates for accuracy.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Dot Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Dot_Plot.png"                  alt="Dot plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Dots mark individual values along an axis to display frequencies or distributions.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Discrete value x continuous.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Shows exact points clearly; simple for small data; avoids binning issues.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Clutters with large or many duplicates; tricky for wide ranges; manual scaling.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Pie Chart
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Pie%20Chart.png"                  alt="Pie chart example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Slices represent category proportions of a whole for quick share views.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Single discrete category (percentages to 100%).
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Intuitive for parts-of-whole; fast for three to six categories.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Inaccurate size comparisons; poor for many or tiny slices; not for trends.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Jitter Plot
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Jitter%20Plot.png"                  alt="Jitter plot example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Randomized point positions reduce overlap in dot plots for visibility.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Continuous or discrete (addresses ties and duplicates) by adding noise to clustered data.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Uncovers patterns in dense data; keeps points distinct; easy enhancement.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Distorts precise positions; still clutters at extremes.
+</p>
+</div>
+</article>
+<article class="component rounded-xl">
+<div class="component-header p-4 bg-gray-800/50 rounded-t-xl">
+<h3 class="text-lg font-semibold text-gray-200">Histogram
+</h3>
+</div>
+<div class="component-content">
+<div class="chart-preview">
+<img                  src="charts_guide/Histogram.png"                  alt="Histogram example"                  loading="lazy"                />
+</div>
+<p class="text-xs text-gray-400 mt-3">Binned bars show frequency distribution for continuous data shape.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-gray-300 font-medium">Data Types:
+</span> Single continuous variable.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-emerald-300 font-medium">Pros:
+</span> Visualizes skewness and modes; scalable for large continuous data; configurable bin count.
+</p>
+<p class="text-xs text-gray-400 mt-2">
+<span class="text-rose-300 font-medium">Cons:
+</span> Bin choice alters appearance; hides individuals; weak for small or comparative data.
+</p>
+</div>
+</article>
+</div>
+</section>
+<!-- Programming Languages -->
+<section id="programming-languages" class="space-y-8">
+<div class="text-center">
+<h2 class="text-2xl font-semibold text-emerald-400">Programming Languages (And Libraries)
+</h2>
+<p class="text-sm text-gray-400 mt-2">Libraries Vega Chart generates for you.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="component rounded-xl text-center language-card">
+<div class="component-content space-y-4">
+<div class="language-logo mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+<svg                  version="1.1"                  xmlns="http://www.w3.org/2000/svg"                  xmlns:xlink="http://www.w3.org/1999/xlink"                  viewBox="0 0 297.45 337.342"                  aria-hidden="true"                  focusable="false"                >
+<path                    fill="#D4B830"                    d="M0,0l27.071,303.62l121.472,33.722l121.811-33.771L297.45,0H0z M138.725,267.6c-92.583-18.464,0,0-92.935-18.45l-5.216-58.467c12.459,0,37.379,0,37.379,0l2.652,29.697l20.741,3.035V96.71l-42.319-0.001l-3.453-37.254h83.151V267.6z M253.797,96.694H198v38.132h52.479L240.159,249.15l-81.091,18.451v-38.819l46.284-8.426l4.484-48.294h-50.769V59.455h98.033L253.797,96.694z"                  >
+</path>
+</svg>
+</div>
+<h3 class="font-semibold">JavaScript (Plotly)
+</h3>
+<div class="language-wordmark">
+<svg                  xmlns="http://www.w3.org/2000/svg"                  viewBox="0 0 120 60"                  aria-hidden="true"                  focusable="false"                >
+<rect fill="#506784" x="62.497" y="19.218" width="3.081" height="18.484" rx="1.54" ry="1.54">
+</rect>
+<rect fill="#506784" x="94.843" y="19.218" width="3.081" height="18.484" rx="1.54" ry="1.54">
+</rect>
+<path                    fill="#506784"                    d="M53.255 22.298a5.83 5.83 0 00-3.196.958 1.54 1.54 0 00-2.965.583v15.403a1.54 1.54 0 003.08 0v-2.426a5.82 5.82 0 003.081.886c3.401 0 6.161-2.955 6.161-6.6v-2.203c0-3.646-2.76-6.6-6.161-6.6zm3.081 8.962c0 1.856-1.379 3.36-3.081 3.36s-3.081-1.504-3.081-3.36v-2.521c0-1.856 1.379-3.36 3.081-3.36s3.081 1.504 3.081 3.36z"                  >
+</path>
+<path                    fill="#506784"                    d="M74.819 22.298c-3.402 0-6.161 2.955-6.161 6.6v2.2c0 3.646 2.759 6.6 6.161 6.6s6.161-2.954 6.161-6.6v-2.2c0-3.645-2.759-6.6-6.161-6.6zm3.081 8.962c0 1.856-1.379 3.36-3.081 3.36s-3.081-1.504-3.081-3.36v-2.521c0-1.856 1.379-3.36 3.081-3.36s3.081 1.504 3.081 3.36z"                  >
+</path>
+<path                    fill="#506784"                    d="M90.222 34.621a3.081 3.081 0 01-3.081-3.081v-6.161h3.081a1.54 1.54 0 000-3.081h-3.081v-1.54a1.54 1.54 0 00-3.08 0v10.782a6.161 6.161 0 006.161 6.161 1.54 1.54 0 000-3.081z"                  >
+</path>
+<path                    fill="#506784"                    d="M111.859 22.424a1.54 1.54 0 00-2.023.809l-3.183 7.45-3.193-7.445a1.54 1.54 0 10-2.824 1.214l4.349 10.146-.514 1.207a3.081 3.081 0 01-2.775 1.9 1.54 1.54 0 000 3.08 6.161 6.161 0 005.54-3.781l5.391-12.551a1.54 1.54 0 00-.839-2.028z"                  >
+</path>
+<rect fill="#119dff" x="7.045" y="13.056" width="33.887" height="33.887" rx="1.54" ry="1.54">
+</rect>
+<circle fill="#25fefd" cx="27.069" cy="26.919" r="1.54">
+</circle>
+<circle fill="#25fefd" cx="33.23" cy="20.758" r="1.54">
+</circle>
+<circle fill="#25fefd" cx="27.069" cy="20.758" r="1.54">
+</circle>
+<circle fill="#25fefd" cx="20.908" cy="20.758" r="1.54">
+</circle>
+<circle fill="#25fefd" cx="14.747" cy="20.758" r="1.54">
+</circle>
+<circle fill="#25fefd" cx="14.747" cy="26.919" r="1.54">
+</circle>
+<path                    fill="#fff"                    d="M14.747 31.54a1.54 1.54 0 00-1.54 1.54v6.162a1.54 1.54 0 003.081 0V33.08a1.54 1.54 0 00-1.54-1.54z"                  >
+</path>
+<path                    fill="#fff"                    d="M27.069 31.54a1.54 1.54 0 00-1.54 1.54v6.162a1.54 1.54 0 003.081 0V33.08a1.54 1.54 0 00-1.54-1.54z"                  >
+</path>
+<path                    fill="#fff"                    d="M20.908 25.379a1.54 1.54 0 00-1.54 1.54v12.323a1.54 1.54 0 003.08 0V26.919a1.54 1.54 0 00-1.54-1.54z"                  >
+</path>
+<path                    fill="#fff"                    d="M33.23 25.379a1.54 1.54 0 00-1.54 1.54v12.323a1.54 1.54 0 003.081 0V26.919a1.54 1.54 0 00-1.54-1.54z"                  >
+</path>
+</svg>
+</div>
+<div class="language-copy">
+<p class="language-description">Interactive, responsive charts for the web with simple configuration.
+</p>
+<p class="language-description">JavaScript is one of the core languages powering the web, with 99% of websites incorporating it to add essential functionality and advanced features. Plotly is a powerful JavaScript charting library that lets you build interactive visualizations entirely in the browser with no server dependencies required. Concerned about privacy? Charts are generated locally on your device, ensuring your data never touches Vega Chart servers. While uploaded files and charts aren't stored by our servers, this client-side approach adds an extra layer of reassurance.
+</p>
+</div>
+</div>
+</div>
+<div class="component rounded-xl text-center language-card">
+<div class="component-content space-y-4">
+<div class="language-logo mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+<svg                  version="1.0"                  id="svg2"                  sodipodi:version="0.32"                  inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"                  sodipodi:docname="python-logo-only.svg"                  width="83.371017pt"                  height="101.00108pt"                  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"                  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"                  xmlns:xlink="http://www.w3.org/1999/xlink"                  xmlns="http://www.w3.org/2000/svg"                  xmlns:svg="http://www.w3.org/2000/svg"                  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"                  xmlns:cc="http://creativecommons.org/ns#"                  xmlns:dc="http://purl.org/dc/elements/1.1/"                  viewBox="0 0 128 128"                  aria-hidden="true"                  focusable="false"                >
+<path                    fill="#3776AB"                    d="M63.391 0.001c-5.875 0.025-11.51 0.524-16.43 1.405-14.524 2.572-17.08 7.948-17.08 17.869v13.087h34.159v4.362H22.787c-9.834 0-18.445 5.919-21.2 17.168-3.114 13.028-3.253 21.154 0 34.712 2.407 10.025 8.151 17.168 17.985 17.168h11.628V90.328c0-11.188 9.688-21.144 21.628-21.144h34.034c9.638 0 17.08-7.937 17.08-17.585V19.275c0-9.407-7.815-16.453-17.08-17.869C84.984 0.584 69.907-0.024 63.391 0.001zM49.932 10.128c3.6 0 6.521 2.948 6.521 6.586 0 3.625-2.921 6.573-6.521 6.573s-6.521-2.948-6.521-6.573c0-3.55 2.921-6.586 6.521-6.586z"                  >
+</path>
+<path                    fill="#FFD43B"                    d="M104.493 36v15.302c0 11.88-10.422 21.636-21.628 21.636H48.83c-9.36 0-17.08 8.082-17.08 17.585v24.112c0 9.407 8.047 14.956 17.08 17.585 10.8 3.172 21.216 3.744 34.034 0 8.591-2.489 17.08-7.511 17.08-17.585v-13.087H65.785v-4.362h34.034c9.834 0 13.477-6.867 17.08-17.168 3.567-10.785 3.39-21.044 0-34.712C113.273 41.919 106.297 36 96.463 36zM80.195 94.025c3.6 0 6.521 2.948 6.521 6.573 0 3.638-2.921 6.586-6.521 6.586s-6.521-2.948-6.521-6.586c0-3.562 2.921-6.573 6.521-6.573z"                  >
+</path>
+</svg>
+</div>
+<h3 class="font-semibold">Python (Seaborn)
+</h3>
+<div class="language-wordmark seaborn">
+<svg viewBox="0 0 595.957 170.634" role="img" aria-label="Seaborn logo" style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Seaborn logo
+</title>
+<defs>
+<style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e5e7eb;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #1f2937; }
+      ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+      /* Shared component styles (match site) */
+      .component { background-color: #111827; border: 1px solid #374151; }
+      .component-header { user-select: none; }
+      .component-content { padding: 1rem; }
+
+      /* Simple gray placeholder block */
+      .placeholder {
+        background: #4b5563;
+        background-image: linear-gradient(135deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(225deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(45deg, #6b7280 25%, transparent 25%),
+                          linear-gradient(315deg, #6b7280 25%, #4b5563 25%);
+        background-position: 10px 0, 10px 0, 0 0, 0 0;
+        background-size: 10px 10px;
+      }
+
+      .swatch { height: 16px; border-radius: 6px; }
+
+      /* Programming languages readability tweaks */
+      .chart-preview {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 0.75rem;
+        border: 1px solid #1f2937;
+        background: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .chart-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .language-card .component-content {
+        padding: 1.5rem 1.75rem;
+      }
+
+      .language-card .language-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .language-card .language-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #d1d5db;
+        letter-spacing: 0.01em;
+      }
+
+      .language-card .language-description:first-child {
+        color: #f9fafb;
+        font-weight: 600;
+      }
+
+      .language-card .language-logo svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .language-card .language-wordmark {
+        width: 9rem;
+        margin: 0 auto;
+      }
+
+      .language-card .language-wordmark svg,
+      .language-card .language-wordmark img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .language-card .language-wordmark.ggplot {
+        width: 6rem;
+      }
+
+      .language-card .language-wordmark.seaborn {
+        width: 12rem; /* 1.5x bigger than previous 8rem */
+      }
+
+      /* Hide problematic inline SVG for Seaborn wordmark; use image instead */
+      .language-card .language-wordmark.seaborn svg {
+        display: none !important;
+      }
+
+      :root {
+        --card-scale: 1.25;
+      }
+
+      .component {
+        border-radius: calc(0.75rem * var(--card-scale)) !important;
+      }
+
+      .component-header,
+      .component-content {
+        padding: calc(1rem * var(--card-scale)) !important;
+      }
+
+      .component .chart-preview {
+        border-radius: calc(0.75rem * var(--card-scale)) !important;
+        height: calc(12rem * var(--card-scale)) !important;
+      }
+
+      .component .chart-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .component .text-lg {
+        font-size: calc(1.125rem * var(--card-scale));
+        line-height: calc(1.75rem * var(--card-scale));
+      }
+
+      .component .text-xs {
+        font-size: calc(0.75rem * var(--card-scale));
+        line-height: calc(1.125rem * var(--card-scale));
+      }
+
+      .component .text-sm {
+        font-size: calc(0.875rem * var(--card-scale));
+        line-height: calc(1.375rem * var(--card-scale));
+      }
+
+      .component .text-2xl {
+        font-size: calc(1.5rem * var(--card-scale));
+        line-height: calc(2rem * var(--card-scale));
+      }
+
+      .component .language-logo {
+        width: calc(3rem * var(--card-scale));
+        height: calc(3rem * var(--card-scale));
+      }
+
+      .component .language-wordmark {
+        width: calc(9rem * var(--card-scale));
+      }
+
+      .component .language-wordmark.ggplot {
+        width: calc(6rem * var(--card-scale));
+      }
+
+      .component .language-wordmark.seaborn {
+        width: calc(12rem * var(--card-scale));
+      }
+
+      .language-card .component-content {
+        padding: calc(1.5rem * var(--card-scale)) calc(1.75rem * var(--card-scale)) !important;
+      }
+</style>
+</defs>
+<g id="figure_1">
+<path id="patch_1" d="M0 170.634h595.958V0H0z" style="fill:none" />
+<g id="axes_1">
+<path id="patch_2" d="M79.2 145.098A65.9 65.9 0 0 0 145.098 79.2 65.9 65.9 0 0 0 79.2 13.302 65.9 65.9 0 0 0 13.302 79.2 65.9 65.9 0 0 0 79.2 145.098z" style="fill:#fff;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p93517fecb0)" />
+<g id="PolyCollection_1">
+<defs>
+<path id="m91af8aa290" d="M-6.224-74.826V-2.35h170.847v-67.076l-2.44-.165-2.44-.188-2.441-.215-2.441-.243-2.44-.276-2.441-.31-2.441-.346-2.44-.386-2.441-.428-2.441-.473-2.44-.519-2.441-.567-2.441-.617-2.44-.667-2.441-.718-2.441-.77-2.44-.819-2.441-.867-2.441-.915-2.44-.957-2.442-.997-2.44-1.032-2.44-1.061-2.442-1.085-2.44-1.1-2.44-1.11-2.442-1.108-2.44-1.1-2.44-1.081-2.442-1.054-2.44-1.016-2.441-.968-2.44-.91-2.441-.845-2.441-.768-2.44-.685-2.441-.592-2.441-.495-2.44-.39-2.441-.283-2.441-.171-2.44-.057-2.441.057-2.441.17-2.44.283-2.441.391-2.441.495-2.44.592-2.441.685-2.441.768-2.44.844-2.442.911-2.44.968-2.44 1.016-2.442 1.054-2.44 1.081-2.44 1.1-2.442 1.109-2.44 1.109-2.44 1.1-2.442 1.085-2.44 1.06-2.441 1.033-2.44.997-2.441.957L3.539-78l-2.44.867-2.441.82-2.441.769z" />
+</defs>
+<g clip-path="url(#p41adfa82e1)">
+<use xlink:href="#m91af8aa290" y="170.634" style="fill:#5c7da2" />
+</g>
+</g>
+<g id="PolyCollection_2">
+<defs>
+<path id="m9c8b484f24" d="M-6.224-98.448v22.402l2.44-.719 2.442-.769 2.44-.819 2.441-.868 2.44-.914 2.441-.957 2.441-.998 2.44-1.031 2.441-1.062 2.441-1.084 2.44-1.1 2.441-1.11 2.441-1.108 2.44-1.1 2.441-1.082 2.441-1.053 2.44-1.016 2.441-.968 2.441-.91 2.44-.845 2.442-.768 2.44-.685 2.44-.593 2.442-.494 2.44-.391 2.44-.283 2.442-.17 2.44-.057 2.44.057 2.442.17 2.44.283 2.441.39 2.44.495 2.441.593 2.441.685 2.44.768 2.441.844 2.441.91 2.44.969 2.441 1.016 2.441 1.053 2.44 1.082 2.441 1.1 2.441 1.109 2.44 1.108 2.441 1.1 2.441 1.085 2.44 1.062 2.441 1.031 2.441.998 2.44.957 2.442.914 2.44.868 2.44.82 2.442.768 2.44.719 2.44.667 2.442.617 2.44.567 2.44.519 2.442.473 2.44.428 2.441.386 2.44.347 2.441.31 2.441.274 2.44.244 2.441.215 2.441.188 2.44.165v-34.956l-2.44-.819-2.44-.868-2.441-.914-2.441-.957-2.44-.997-2.441-1.032-2.441-1.062-2.44-1.084-2.441-1.1-2.441-1.11-2.44-1.108-2.441-1.1-2.441-1.081-2.44-1.054-2.441-1.016-2.441-.968-2.44-.91-2.441-.845-2.441-.768-2.44-.685-2.442-.593-2.44-.494-2.44-.39-2.442-.283-2.44-.171-2.44-.057-2.442.057-2.44.17-2.44.283-2.442.39-2.44.495-2.441.593-2.44.685-2.441.768-2.441.844-2.44.911-2.441.968-2.441 1.016-2.44 1.054-2.441 1.081-2.441 1.1-2.44 1.109-2.441 1.109-2.441 1.1-2.44 1.084-2.441 1.062-2.441 1.032-2.44.997-2.441.957-2.441.914-2.44.868-2.442.82-2.44.769-2.44.718-2.442.667-2.44.617-2.44.567-2.442.52-2.44.472-2.44.428-2.442.386-2.44.347-2.441.31-2.44.275-2.441.243-2.441.215-2.44.188-2.441.165-2.441.143z" />
+</defs>
+<g clip-path="url(#p41adfa82e1)">
+<use xlink:href="#m9c8b484f24" y="170.634" style="fill:#7db0bc" />
+</g>
+</g>
+<path id="patch_3" d="M146.319 79.2A67.12 67.12 0 0 0 31.74 31.74 67.12 67.12 0 0 0 79.2 146.319 67.12 67.12 0 0 0 146.319 79.2m-1.22 0a65.9 65.9 0 0 1-112.496 46.597A65.9 65.9 0 0 1 79.2 13.302 65.9 65.9 0 0 1 145.098 79.2m1.22 0z" style="fill:#444876;stroke:#444876;stroke-linejoin:miter" clip-path="url(#p93517fecb0)" />
+<path id="patch_4" d="M-6.224 169.505H8.42v-51.483H-6.224z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_5" d="M8.42 169.505h14.644V111.93H8.42z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_6" d="M23.064 169.505h14.644v-68.159H23.064z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_7" d="M37.708 169.505h14.645V91.147H37.708z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_8" d="M52.353 169.505h14.644V89.308H52.353z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_9" d="M66.997 169.505H81.64V97.492H66.997z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_10" d="M81.64 169.505h14.645v-60.71H81.64z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_11" d="M96.285 169.505h14.644v-52.978H96.285z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<path id="patch_12" d="M110.929 169.505h14.644V119.79h-14.644z" style="fill:#444876;stroke:#fff;stroke-linejoin:miter" clip-path="url(#p41adfa82e1)" />
+<g id="PathCollection_1">
+<path d="M79.2 80.318a1.118 1.118 0 1 0 0-2.236 1.118 1.118 0 0 0 0 2.236zm-.648-5.724a2.227 2.227 0 1 0 0-4.454 2.227 2.227 0 0 0 0 4.454zm-5.397-8.947a1.24 1.24 0 1 0 0-2.481 1.24 1.24 0 0 0 0 2.48zm1.116 12.938a2.211 2.211 0 1 0 0-4.423 2.211 2.211 0 0 0 0 4.423z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M74.644 83.476a2.484 2.484 0 1 0 0-4.968 2.484 2.484 0 0 0 0 4.968zM82.8 76.1a2.521 2.521 0 1 0 0-5.043 2.521 2.521 0 0 0 0 5.043zm3.06 6.518a1.834 1.834 0 1 0 0-3.667 1.834 1.834 0 0 0 0 3.667zM72.558 70.679a1.607 1.607 0 1 0 0-3.213 1.607 1.607 0 0 0 0 3.213zm8.795 14.648a1.712 1.712 0 1 0 0-3.425 1.712 1.712 0 0 0 0 3.425zm9.321-7.795a1.816 1.816 0 1 0 0-3.632 1.816 1.816 0 0 0 0 3.632zM66.266 62.851a2.112 2.112 0 1 0 0-4.224 2.112 2.112 0 0 0 0 4.224zm27.171 27.466a1.333 1.333 0 1 0 0-2.666 1.333 1.333 0 0 0 0 2.666zM67.279 71.678a1.255 1.255 0 1 0 0-2.51 1.255 1.255 0 0 0 0 2.51zm5.674-11.038a2.355 2.355 0 1 0 0-4.709 2.355 2.355 0 0 0 0 4.71zm7.497 6.832a1.923 1.923 0 1 0 0-3.847 1.923 1.923 0 0 0 0 3.847zm16.342 28.073a1.953 1.953 0 1 0 0-3.907 1.953 1.953 0 0 0 0 3.907zm-21.114-2.422a1.854 1.854 0 1 0 0-3.709 1.854 1.854 0 0 0 0 3.71zM58.952 79.629a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2zM84.235 70.514a2.313 2.313 0 1 0 0-4.626 2.313 2.313 0 0 0 0 4.626zM78.9 99.625a2.406 2.406 0 1 0 0-4.812 2.406 2.406 0 0 0 0 4.812z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M86.312 66.3a2.198 2.198 0 1 0 0-4.396 2.198 2.198 0 0 0 0 4.396zm-21.713-8.046a1.72 1.72 0 1 0 0-3.439 1.72 1.72 0 0 0 0 3.44zm1.315 21.666a1.789 1.789 0 1 0 0-3.578 1.789 1.789 0 0 0 0 3.577zm-4.928-9.93a2.216 2.216 0 1 0 0-4.431 2.216 2.216 0 0 0 0 4.432zm31.064-1.095a2.619 2.619 0 1 0 0-5.237 2.619 2.619 0 0 0 0 5.237zm-3.631 4.225a1.31 1.31 0 1 0 0-2.622 1.31 1.31 0 0 0 0 2.622zm-.92 26.186a1.58 1.58 0 1 0 0-3.159 1.58 1.58 0 0 0 0 3.16zM62.758 75.65a2.592 2.592 0 1 0 0-5.184 2.592 2.592 0 0 0 0 5.184zm7.731 17.144a1.458 1.458 0 1 0 0-2.917 1.458 1.458 0 0 0 0 2.917zM51.076 70.631a1.638 1.638 0 1 0 0-3.277 1.638 1.638 0 0 0 0 3.277zm26.415-10.606a2.55 2.55 0 1 0 0-5.099 2.55 2.55 0 0 0 0 5.1zm5.236 3.035a1.786 1.786 0 1 0 0-3.571 1.786 1.786 0 0 0 0 3.571zM64.635 50.664a2.537 2.537 0 1 0 0-5.075 2.537 2.537 0 0 0 0 5.075zm5.295 32.459a2.222 2.222 0 1 0 0-4.444 2.222 2.222 0 0 0 0 4.444zm16.482 6.454a2.274 2.274 0 1 0 0-4.548 2.274 2.274 0 0 0 0 4.548z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M90.48 87.488a2.378 2.378 0 1 0 0-4.755 2.378 2.378 0 0 0 0 4.755zm.126-24.478a2.252 2.252 0 1 0 0-4.505 2.252 2.252 0 0 0 0 4.505zm.141 41.263a2.112 2.112 0 1 0 0-4.225 2.112 2.112 0 0 0 0 4.225zm-8.884-47.892a1.187 1.187 0 1 0 0-2.374 1.187 1.187 0 0 0 0 2.374zm12.312 26.983a2.356 2.356 0 1 0 0-4.71 2.356 2.356 0 0 0 0 4.71zm1.055-21.729a2.421 2.421 0 1 0 0-4.842 2.421 2.421 0 0 0 0 4.842zM77.01 88.626a1.638 1.638 0 1 0 0-3.276 1.638 1.638 0 0 0 0 3.276zm4.518 3.836a2.165 2.165 0 1 0 0-4.33 2.165 2.165 0 0 0 0 4.33zm23.852-1.268a2.2 2.2 0 1 0 0-4.399 2.2 2.2 0 0 0 0 4.4zM70.812 75.15a1.797 1.797 0 1 0 0-3.595 1.797 1.797 0 0 0 0 3.594zm25.879 3.674a2.249 2.249 0 1 0 0-4.498 2.249 2.249 0 0 0 0 4.498zm3.647 4.579a1.332 1.332 0 1 0 0-2.663 1.332 1.332 0 0 0 0 2.663zM60.539 64.265a1.85 1.85 0 1 0 0-3.7 1.85 1.85 0 0 0 0 3.7zm45.105 20.079a1.803 1.803 0 1 0 0-3.607 1.803 1.803 0 0 0 0 3.607zM66.853 67.876a2.413 2.413 0 1 0 0-4.826 2.413 2.413 0 0 0 0 4.826zm18.656 37.903a1.888 1.888 0 1 0 0-3.776 1.888 1.888 0 0 0 0 3.776zm-14.844-7.233a1.88 1.88 0 1 0 0-3.761 1.88 1.88 0 0 0 0 3.761zm.171-10.656a2.513 2.513 0 1 0 0-5.026 2.513 2.513 0 0 0 0 5.027zM62.1 82.926a1.734 1.734 0 1 0 0-3.468 1.734 1.734 0 0 0 0 3.468zm25.16 12.6a2.613 2.613 0 1 0 0-5.226 2.613 2.613 0 0 0 0 5.226zm19.482-16.512a1.499 1.499 0 1 0 0-2.998 1.499 1.499 0 0 0 0 2.998zm-17.246-21.83a1.844 1.844 0 1 0 0-3.69 1.844 1.844 0 0 0 0 3.69zm.711 51.999a2.35 2.35 0 1 0 0-4.699 2.35 2.35 0 0 0 0 4.7zm5.939-4.516a2.422 2.422 0 1 0 0-4.844 2.422 2.422 0 0 0 0 4.844zm-25.876.17a2.227 2.227 0 1 0 0-4.453 2.227 2.227 0 0 0 0 4.453zM99.41 69.33a1.85 1.85 0 1 0 0-3.7 1.85 1.85 0 0 0 0 3.7zm-1.16 20.275a1.657 1.657 0 1 0 0-3.313 1.657 1.657 0 0 0 0 3.313zm-2.047 19.763a1.32 1.32 0 1 0 0-2.64 1.32 1.32 0 0 0 0 2.64zm-13.583.505a1.963 1.963 0 1 0 0-3.926 1.963 1.963 0 0 0 0 3.926zm20.587-13.243a2.373 2.373 0 1 0 0-4.745 2.373 2.373 0 0 0 0 4.745zm-10.85 1.703a1.85 1.85 0 1 0 0-3.7 1.85 1.85 0 0 0 0 3.7zm-29.76-4.251a2.412 2.412 0 1 0 0-4.824 2.412 2.412 0 0 0 0 4.824zm33.687-20.706a1.91 1.91 0 1 0 0-3.818 1.91 1.91 0 0 0 0 3.818z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M73.662 108.128a2.566 2.566 0 1 0 0-5.131 2.566 2.566 0 0 0 0 5.131zm36.282-14.938a2.536 2.536 0 1 0 0-5.073 2.536 2.536 0 0 0 0 5.072zm-5.364-20.403a2.347 2.347 0 1 0 0-4.693 2.347 2.347 0 0 0 0 4.693zm-58.955-1.668a1.232 1.232 0 1 0 0-2.464 1.232 1.232 0 0 0 0 2.464zM59.171 54.49a2.458 2.458 0 1 0 0-4.916 2.458 2.458 0 0 0 0 4.916zm1.011 33.443a1.935 1.935 0 1 0 0-3.87 1.935 1.935 0 0 0 0 3.87zm21.972 13.597a1.327 1.327 0 1 0 0-2.653 1.327 1.327 0 0 0 0 2.654zM53.915 56.924a2.314 2.314 0 1 0 0-4.627 2.314 2.314 0 0 0 0 4.627zM65.44 90.503a2.374 2.374 0 1 0-.001-4.749 2.374 2.374 0 0 0 0 4.749zm35.412 12.422a1.151 1.151 0 1 0 0-2.303 1.151 1.151 0 0 0 0 2.303zM69.244 47.641a2.613 2.613 0 1 0 0-5.225 2.613 2.613 0 0 0 0 5.225zM100.2 64.434a1.564 1.564 0 1 0 0-3.128 1.564 1.564 0 0 0 0 3.128zM49.972 51.437a1.756 1.756 0 1 0 0-3.51 1.756 1.756 0 0 0 0 3.51zm58.415 44.598a1.214 1.214 0 1 0 0-2.429 1.214 1.214 0 0 0 0 2.429zm4.214-12.225a2.19 2.19 0 1 0 0-4.381 2.19 2.19 0 0 0 0 4.381zM52.92 79.335a2.285 2.285 0 1 0 0-4.57 2.285 2.285 0 0 0 0 4.57zm-1.816 6.475a2.52 2.52 0 1 0 0-5.04 2.52 2.52 0 0 0 0 5.04zm54.752 26.112a2.157 2.157 0 1 0 0-4.314 2.157 2.157 0 0 0 0 4.314zm13.389-34.73a2.192 2.192 0 1 0 0-4.384 2.192 2.192 0 0 0 0 4.384zM97.733 54.713a2.189 2.189 0 1 0 0-4.377 2.189 2.189 0 0 0 0 4.377zm-12.176-3.631a2.507 2.507 0 1 0 0-5.014 2.507 2.507 0 0 0 0 5.014zm26.503 25.761a1.73 1.73 0 1 0 0-3.46 1.73 1.73 0 0 0 0 3.46zm-53.92-2.812a2.28 2.28 0 1 0 0-4.56 2.28 2.28 0 0 0 0 4.56zm60.639 14.222a1.444 1.444 0 1 0 0-2.888 1.444 1.444 0 0 0 0 2.888z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M100.888 58.876a2.563 2.563 0 1 0 0-5.126 2.563 2.563 0 0 0 0 5.126zm-45.315 29.94a1.69 1.69 0 1 0 0-3.38 1.69 1.69 0 0 0 0 3.38zm45.954-11.801a2.407 2.407 0 1 0 0-4.814 2.407 2.407 0 0 0 0 4.814zm-15.754 37.873a2.414 2.414 0 1 0 0-4.83 2.414 2.414 0 0 0 0 4.83zM45.637 61.054a2.086 2.086 0 1 0 0-4.171 2.086 2.086 0 0 0 0 4.171zm-.23 28.183a2.408 2.408 0 1 0 0-4.817 2.408 2.408 0 0 0 0 4.817z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M103.122 54.76a2.472 2.472 0 1 0 0-4.943 2.472 2.472 0 0 0 0 4.944zm-26.933 48.924a2.473 2.473 0 1 0 0-4.946 2.473 2.473 0 0 0 0 4.946zm3.732 2.141a1.498 1.498 0 1 0 0-2.996 1.498 1.498 0 0 0 0 2.996zm33.693-7.569a1.798 1.798 0 1 0 0-3.596 1.798 1.798 0 0 0 0 3.596zm-8.256 3.591a1.458 1.458 0 1 0 0-2.915 1.458 1.458 0 0 0 0 2.915zm-4.745 13.235a2.037 2.037 0 1 0 0-4.075 2.037 2.037 0 0 0 0 4.075zm-8.199.783a1.542 1.542 0 1 0 0-3.084 1.542 1.542 0 0 0 0 3.084zm22.115-44.909a1.477 1.477 0 1 0 0-2.954 1.477 1.477 0 0 0 0 2.954zM55.362 82.564a1.156 1.156 0 1 0 0-2.312 1.156 1.156 0 0 0 0 2.312zm.145-17.625a1.544 1.544 0 1 0 0-3.09 1.544 1.544 0 0 0 0 3.09zm2.809 34.218a2.452 2.452 0 1 0 0-4.903 2.452 2.452 0 0 0 0 4.903zm52.737-10.734a2.354 2.354 0 1 0 0-4.708 2.354 2.354 0 0 0 0 4.708zM48.29 44.54a2.513 2.513 0 1 0 0-5.026 2.513 2.513 0 0 0 0 5.026zm6.782 4.703a1.944 1.944 0 1 0 0-3.887 1.944 1.944 0 0 0 0 3.887zm22.397 63.404a1.812 1.812 0 1 0 0-3.624 1.812 1.812 0 0 0 0 3.624zm-5.325 1.518a1.542 1.542 0 1 0 0-3.084 1.542 1.542 0 0 0 0 3.084zm-18.307-19.11a1.983 1.983 0 1 0 0-3.967 1.983 1.983 0 0 0 0 3.967zm8.465 6.78a1.526 1.526 0 1 0 0-3.052 1.526 1.526 0 0 0 0 3.052zm26.286-58.393a2.273 2.273 0 1 0 0-4.546 2.273 2.273 0 0 0 0 4.546zm22.875 61.222a2.063 2.063 0 1 0 0-4.125 2.063 2.063 0 0 0 0 4.125zM40.92 55.49a1.378 1.378 0 1 0 0-2.755 1.378 1.378 0 0 0 0 2.755zm74.112 36.182a1.417 1.417 0 1 0 0-2.833 1.417 1.417 0 0 0 0 2.833zM48.545 81.333a2.155 2.155 0 1 0 0-4.31 2.155 2.155 0 0 0 0 4.31zM91.978 53.24a1.747 1.747 0 1 0 0-3.494 1.747 1.747 0 0 0 0 3.495zm-46.481.953a1.635 1.635 0 1 0 0-3.27 1.635 1.635 0 0 0 0 3.27zm2.133 14.085a2.567 2.567 0 1 0 0-5.133 2.567 2.567 0 0 0 0 5.133zm73.968 28.303a2.18 2.18 0 1 0 0-4.359 2.18 2.18 0 0 0 0 4.36zM37.15 49.013a2.167 2.167 0 1 0 0-4.335 2.167 2.167 0 0 0 0 4.335zm69.111 57.991a1.889 1.889 0 1 0 0-3.777 1.889 1.889 0 0 0 0 3.777zm.743-40.481a2.14 2.14 0 1 0 0-4.278 2.14 2.14 0 0 0 0 4.278zm-69.571 3.059a2.104 2.104 0 1 0 0-4.209 2.104 2.104 0 0 0 0 4.209zm64.217 38.316a1.637 1.637 0 1 0 0-3.274 1.637 1.637 0 0 0 0 3.274zm23.935-7.264a1.198 1.198 0 1 0 0-2.396 1.198 1.198 0 0 0 0 2.396zm-47.85 16.807a2.121 2.121 0 1 0 0-4.242 2.121 2.121 0 0 0 0 4.242zm-1.055 4.603a2.315 2.315 0 1 0 0-4.63 2.315 2.315 0 0 0 0 4.63zM66.23 95.53a1.33 1.33 0 1 0 0-2.661 1.33 1.33 0 0 0 0 2.66zm40.397-36.197a1.662 1.662 0 1 0 0-3.323 1.662 1.662 0 0 0 0 3.323zm-36.533 51.566a2.528 2.528 0 1 0 0-5.056 2.528 2.528 0 0 0 0 5.056zm-1.332 11.021a1.849 1.849 0 1 0 0-3.698 1.849 1.849 0 0 0 0 3.698zm52.088-51.973a1.856 1.856 0 1 0 0-3.712 1.856 1.856 0 0 0 0 3.712zm-22.351 30.435a2.323 2.323 0 1 0 0-4.646 2.323 2.323 0 0 0 0 4.646zM43.124 77.573a1.564 1.564 0 1 0 0-3.127 1.564 1.564 0 0 0 0 3.127zm14.96 16.093a2.15 2.15 0 1 0 0-4.3 2.15 2.15 0 0 0 0 4.3zM47.893 97.61a1.767 1.767 0 1 0 0-3.532 1.767 1.767 0 0 0 0 3.533zm50.29-49.318a1.831 1.831 0 1 0 0-3.662 1.831 1.831 0 0 0 0 3.662zm13.065 63.764a2.448 2.448 0 1 0 0-4.897 2.448 2.448 0 0 0 0 4.897z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M115.614 109.96a2.559 2.559 0 1 0 0-5.117 2.559 2.559 0 0 0 0 5.117zM80.39 123.334a1.146 1.146 0 1 0 0-2.292 1.146 1.146 0 0 0 0 2.292zM50.028 90.629a1.404 1.404 0 1 0 0-2.809 1.404 1.404 0 0 0 0 2.809zm58.345 25.933a2.528 2.528 0 1 0 0-5.056 2.528 2.528 0 0 0 0 5.056zm7.294-13.231a2.225 2.225 0 1 0 0-4.449 2.225 2.225 0 0 0 0 4.45zm-50.351 5.385a2.168 2.168 0 1 0 0-4.335 2.168 2.168 0 0 0 0 4.335zM45.677 48.057a1.13 1.13 0 1 0 0-2.26 1.13 1.13 0 0 0 0 2.26zm58.077 71.011a2.424 2.424 0 1 0 0-4.849 2.424 2.424 0 0 0 0 4.849zm-42.95-72.772a2.11 2.11 0 1 0 0-4.218 2.11 2.11 0 0 0 0 4.218zm16.023 1.221a1.82 1.82 0 1 0 0-3.64 1.82 1.82 0 0 0 0 3.64zm3.332-11.357a1.191 1.191 0 1 0 0-2.382 1.191 1.191 0 0 0 0 2.383zm46.982 52.49a2.043 2.043 0 1 0 0-4.086 2.043 2.043 0 0 0 0 4.086zM82.69 97.463a2.487 2.487 0 1 0 0-4.973 2.487 2.487 0 0 0 0 4.973zm34.524-12.335a2.498 2.498 0 1 0 0-4.995 2.498 2.498 0 0 0 0 4.995zm3.173 28.458a1.807 1.807 0 1 0 0-3.614 1.807 1.807 0 0 0 0 3.614zM84.032 43.019a1.99 1.99 0 1 0 0-3.982 1.99 1.99 0 0 0 0 3.982zm-19.887-1.162a2.045 2.045 0 1 0 0-4.09 2.045 2.045 0 0 0 0 4.09zm59.632 41.162a1.424 1.424 0 1 0 0-2.849 1.424 1.424 0 0 0 0 2.849zM85.041 120.55a1.322 1.322 0 1 0 0-2.643 1.322 1.322 0 0 0 0 2.643zm-12.733 4.444a2.24 2.24 0 1 0 0-4.479 2.24 2.24 0 0 0 0 4.479zM124.3 78.663a2.528 2.528 0 1 0 0-5.056 2.528 2.528 0 0 0 0 5.056zM38.523 61.515a1.66 1.66 0 1 0 0-3.32 1.66 1.66 0 0 0 0 3.32zm90.65 16.735a1.475 1.475 0 1 0 0-2.95 1.475 1.475 0 0 0 0 2.95zm-15.114 38.13a1.557 1.557 0 1 0 0-3.114 1.557 1.557 0 0 0 0 3.113zm-8.257 7.851a1.526 1.526 0 1 0 0-3.051 1.526 1.526 0 0 0 0 3.051z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M126.653 74.203a2.424 2.424 0 1 0 0-4.848 2.424 2.424 0 0 0 0 4.848zM93.19 43.876a2.528 2.528 0 1 0 0-5.055 2.528 2.528 0 0 0 0 5.055zm38.916 48.39a2.5 2.5 0 1 0 0-5.002 2.5 2.5 0 0 0 0 5.002zM48.01 106.649a2.308 2.308 0 1 0 0-4.616 2.308 2.308 0 0 0 0 4.616zm6.556-2.491a2.513 2.513 0 1 0 0-5.026 2.513 2.513 0 0 0 0 5.026zM68.8 42.164a2.32 2.32 0 1 0 0-4.64 2.32 2.32 0 0 0 0 4.64zm-26.959 1.871a2.151 2.151 0 1 0 0-4.303 2.151 2.151 0 0 0 0 4.303zm11.972-5.555a2.487 2.487 0 1 0 0-4.974 2.487 2.487 0 0 0 0 4.975zm66.265 24.769a1.295 1.295 0 1 0 0-2.59 1.295 1.295 0 0 0 0 2.59zm9.552 4.489a2.243 2.243 0 1 0 0-4.485 2.243 2.243 0 0 0 0 4.485zm-8.024 53.732a2.337 2.337 0 1 0 0-4.674 2.337 2.337 0 0 0 0 4.674zm-21.132-79.64a1.536 1.536 0 1 0 0-3.073 1.536 1.536 0 0 0 0 3.073zm-53.51-6.274a1.954 1.954 0 1 0 0-3.908 1.954 1.954 0 0 0 0 3.908zm8.813 8.753a1.663 1.663 0 1 0 0-3.327 1.663 1.663 0 0 0 0 3.327zm75.054 40.768a2.05 2.05 0 1 0 0-4.1 2.05 2.05 0 0 0 0 4.1zm-42.456 32.375a1.342 1.342 0 1 0 0-2.685 1.342 1.342 0 0 0 0 2.685zm-47.05-15.675a1.597 1.597 0 1 0 0-3.193 1.597 1.597 0 0 0 0 3.193zM59.76 40.7a1.69 1.69 0 1 0 0-3.38 1.69 1.69 0 0 0 0 3.38zm39.602 80.955a2.332 2.332 0 1 0 0-4.664 2.332 2.332 0 0 0 0 4.664zm12.965-59.195a2.21 2.21 0 1 0 0-4.418 2.21 2.21 0 0 0 0 4.418zM42.92 84.053a1.986 1.986 0 1 0 0-3.972 1.986 1.986 0 0 0 0 3.972zm-9.255-39.062a1.701 1.701 0 1 0 0-3.402 1.701 1.701 0 0 0 0 3.402zm4.685-6.614a1.56 1.56 0 1 0 0-3.121 1.56 1.56 0 0 0 0 3.121zM36.591 79.49a2.575 2.575 0 1 0 0-5.15 2.575 2.575 0 0 0 0 5.15zm31.357 36.643a1.361 1.361 0 1 0 0-2.722 1.361 1.361 0 0 0 0 2.722zm-29.288-27.7a1.993 1.993 0 1 0 0-3.987 1.993 1.993 0 0 0 0 3.987zm100.545-.181a1.313 1.313 0 1 0 0-2.625 1.313 1.313 0 0 0 0 2.625zm-64.851-45.03a1.308 1.308 0 1 0 0-2.616 1.308 1.308 0 0 0 0 2.616zM32.465 53.603a2.162 2.162 0 1 0 0-4.324 2.162 2.162 0 0 0 0 4.324zm-4.829-3.645a1.625 1.625 0 1 0 0-3.25 1.625 1.625 0 0 0 0 3.25zm77.608-1.209a2.273 2.273 0 1 0 0-4.546 2.273 2.273 0 0 0 0 4.546zm17.796 42.029a1.923 1.923 0 1 0 0-3.847 1.923 1.923 0 0 0 0 3.847zm-12.743-20.393a2.513 2.513 0 1 0 0-5.025 2.513 2.513 0 0 0 0 5.025zm22.488.975a1.187 1.187 0 1 0 0-2.376 1.187 1.187 0 0 0 0 2.375zm-23.143-16.78a1.533 1.533 0 1 0 0-3.065 1.533 1.533 0 0 0 0 3.065zm-62.506 58.144a2.567 2.567 0 1 0 0-5.135 2.567 2.567 0 0 0 0 5.135zm.654-36.064a1.827 1.827 0 1 0 0-3.655 1.827 1.827 0 0 0 0 3.654zm89.082-10.245a2.543 2.543 0 1 0 0-5.087 2.543 2.543 0 0 0 0 5.087zM86.004 128.38a1.958 1.958 0 1 0 0-3.917 1.958 1.958 0 0 0 0 3.917zm-7.189-85.538a1.635 1.635 0 1 0 0-3.27 1.635 1.635 0 0 0 0 3.27zM41.648 51.33a2.52 2.52 0 1 0 0-5.04 2.52 2.52 0 0 0 0 5.04zm-2.627 22.738a2.43 2.43 0 1 0 0-4.858 2.43 2.43 0 0 0 0 4.858z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M115.565 66.104a2.56 2.56 0 1 0 0-5.12 2.56 2.56 0 0 0 0 5.12zm-35.904 62.922a1.573 1.573 0 1 0 0-3.146 1.573 1.573 0 0 0 0 3.146zm-47.064-25.97a2.459 2.459 0 1 0 0-4.918 2.459 2.459 0 0 0 0 4.918zm29.339 20.13a1.448 1.448 0 1 0 0-2.896 1.448 1.448 0 0 0 0 2.896zm35.233-83.314a2.527 2.527 0 1 0 0-5.053 2.527 2.527 0 0 0 0 5.053zm-41.533 30.09a1.901 1.901 0 1 0 0-3.802 1.901 1.901 0 0 0 0 3.802zM114.4 57.93a2.07 2.07 0 1 0 0-4.14 2.07 2.07 0 0 0 0 4.14zm-80.595 5.75a1.466 1.466 0 1 0 0-2.934 1.466 1.466 0 0 0 0 2.933zm59.823 57.805a2.003 2.003 0 1 0 0-4.005 2.003 2.003 0 0 0 0 4.005zm-8.66 12.233a2.207 2.207 0 1 0 0-4.415 2.207 2.207 0 0 0 0 4.415zM70.436 35.074a2.016 2.016 0 1 0 0-4.032 2.016 2.016 0 0 0 0 4.032zm63.78 22.42a1.914 1.914 0 1 0 0-3.829 1.914 1.914 0 0 0 0 3.83zm-48.569 1.739a1.724 1.724 0 1 0 0-3.448 1.724 1.724 0 0 0 0 3.448zm42.438 37.162a2.506 2.506 0 1 0 0-5.012 2.506 2.506 0 0 0 0 5.012zM93.08 129.134a2.394 2.394 0 1 0 0-4.787 2.394 2.394 0 0 0 0 4.787zM39.84 93.715a2.353 2.353 0 1 0 0-4.706 2.353 2.353 0 0 0 0 4.706zm72.486-55.865a2.06 2.06 0 1 0 0-4.119 2.06 2.06 0 0 0 0 4.12zm-52.771 70.714a1.81 1.81 0 1 0 0-3.62 1.81 1.81 0 0 0 0 3.62zm25.372-71.763a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28zm36.201 20.772a2.415 2.415 0 1 0 0-4.829 2.415 2.415 0 0 0 0 4.83zm-.543 48.565a1.246 1.246 0 1 0 0-2.492 1.246 1.246 0 0 0 0 2.492zM49.173 58.437a2.138 2.138 0 1 0 0-4.277 2.138 2.138 0 0 0 0 4.277zm60.461 68.637a1.98 1.98 0 1 0 0-3.96 1.98 1.98 0 0 0 0 3.96zM90.489 37.508a2.047 2.047 0 1 0 0-4.095 2.047 2.047 0 0 0 0 4.095zm-28.877 81.436a2.506 2.506 0 1 0 0-5.013 2.506 2.506 0 0 0 0 5.013zm43.372-79.441a1.696 1.696 0 1 0 0-3.393 1.696 1.696 0 0 0 0 3.393zm-7.558 87.186a2.488 2.488 0 1 0 0-4.977 2.488 2.488 0 0 0 0 4.977zm-43.94-9.718a1.959 1.959 0 1 0 0-3.917 1.959 1.959 0 0 0 0 3.917zm43.196.677a1.955 1.955 0 1 0 0-3.91 1.955 1.955 0 0 0 0 3.91zM42.413 96.714a1.27 1.27 0 1 0 0-2.541 1.27 1.27 0 0 0 0 2.541zm78.585-53.534a1.53 1.53 0 1 0 0-3.059 1.53 1.53 0 0 0 0 3.058zM63.777 31.944a1.318 1.318 0 1 0 0-2.636 1.318 1.318 0 0 0 0 2.636zm11.983-3.618a1.93 1.93 0 1 0 0-3.86 1.93 1.93 0 0 0 0 3.86zm-11.429 86.005a2.413 2.413 0 1 0 0-4.825 2.413 2.413 0 0 0 0 4.825zm71.104-34.521a2.01 2.01 0 1 0 0-4.02 2.01 2.01 0 0 0 0 4.02z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M58.151 115.542a2.149 2.149 0 1 0 0-4.297 2.149 2.149 0 0 0 0 4.297zm62.506-76.874a2.542 2.542 0 1 0 0-5.084 2.542 2.542 0 0 0 0 5.084zm-8.323 83.42a1.836 1.836 0 1 0 0-3.673 1.836 1.836 0 0 0 0 3.673zm-55.573.015a2.423 2.423 0 1 0 0-4.846 2.423 2.423 0 0 0 0 4.846zm16.045-3.104a1.92 1.92 0 1 0 0-3.84 1.92 1.92 0 0 0 0 3.84zM33.718 86.316a1.513 1.513 0 1 0 0-3.026 1.513 1.513 0 0 0 0 3.026zm103.259-.832a2.406 2.406 0 1 0 0-4.812 2.406 2.406 0 0 0 0 4.812zm-6.013 22.87a2.133 2.133 0 1 0 0-4.266 2.133 2.133 0 0 0 0 4.266zM72.849 39.707a2.402 2.402 0 1 0 0-4.805 2.402 2.402 0 0 0 0 4.805z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M140.158 82.313a2.407 2.407 0 1 0 0-4.813 2.407 2.407 0 0 0 0 4.813zm-90.253 41.245a2.136 2.136 0 1 0 0-4.271 2.136 2.136 0 0 0 0 4.27zM37.646 99.925a2.552 2.552 0 1 0 0-5.104 2.552 2.552 0 0 0 0 5.104zm81.208-46.789a2.05 2.05 0 1 0 0-4.101 2.05 2.05 0 0 0 0 4.101zm-85.63 40.862a2.001 2.001 0 1 0 0-4.002 2.001 2.001 0 0 0 0 4.002zm105.212-17.575a1.987 1.987 0 1 0 0-3.974 1.987 1.987 0 0 0 0 3.974zm-56.7-45.718a2.396 2.396 0 1 0 0-4.793 2.396 2.396 0 0 0 0 4.793zM134.163 95.6a1.505 1.505 0 1 0 0-3.009 1.505 1.505 0 0 0 0 3.01zM102.51 33.624a2.483 2.483 0 1 0 0-4.965 2.483 2.483 0 0 0 0 4.965zm13.098 92.145a2.247 2.247 0 1 0 0-4.494 2.247 2.247 0 0 0 0 4.494zm14.572-22.374a1.78 1.78 0 1 0 0-3.56 1.78 1.78 0 0 0 0 3.56zm-77.252-3.776a2.194 2.194 0 1 0 0-4.389 2.194 2.194 0 0 0 0 4.389zM128.21 49.23a2.35 2.35 0 1 0 0-4.7 2.35 2.35 0 0 0 0 4.7zm.24 7.804a1.477 1.477 0 1 0 0-2.954 1.477 1.477 0 0 0 0 2.954zM75.217 20.776a1.342 1.342 0 1 0 0-2.683 1.342 1.342 0 0 0 0 2.683zM46.765 117.8a1.559 1.559 0 1 0 0-3.118 1.559 1.559 0 0 0 0 3.117zm49.882-82.78a2.253 2.253 0 1 0 0-4.506 2.253 2.253 0 0 0 0 4.507zm-3.015-4.327a1.819 1.819 0 1 0 0-3.638 1.819 1.819 0 0 0 0 3.638z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M84.491 26.732a2.334 2.334 0 1 0 0-4.667 2.334 2.334 0 0 0 0 4.667zM58.748 36.25a2.616 2.616 0 1 0 0-5.233 2.616 2.616 0 0 0 0 5.233zm-6.945 74.203a1.373 1.373 0 1 0 0-2.747 1.373 1.373 0 0 0 0 2.747zm28.263 24.563a2 2 0 1 0 0-4.001 2 2 0 0 0 0 4.001zm54.922-34.006a1.937 1.937 0 1 0 0-3.873 1.937 1.937 0 0 0 0 3.873zM42.607 32.397a1.425 1.425 0 1 0 0-2.849 1.425 1.425 0 0 0 0 2.85zm6.773-.955a1.847 1.847 0 1 0 0-3.694 1.847 1.847 0 0 0 0 3.694zm37.374 109.566a1.34 1.34 0 1 0 0-2.679 1.34 1.34 0 0 0 0 2.68zm24.934-91.326a1.296 1.296 0 1 0 0-2.591 1.296 1.296 0 0 0 0 2.591zm25.952 43.164a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12zm-16.534 9.025a2.432 2.432 0 1 0 0-4.863 2.432 2.432 0 0 0 0 4.863zm-91.45-2.834a2.088 2.088 0 1 0 0-4.175 2.088 2.088 0 0 0 0 4.175zm95.498-34.077a1.812 1.812 0 1 0 0-3.624 1.812 1.812 0 0 0 0 3.623zm-35.468 58.69a1.893 1.893 0 1 0 0-3.786 1.893 1.893 0 0 0 0 3.786zm21.749-81.019a2.277 2.277 0 1 0 0-4.553 2.277 2.277 0 0 0 0 4.553zm-24.975-12a1.264 1.264 0 1 0 0-2.528 1.264 1.264 0 0 0 0 2.528zm-26.845.255a2.398 2.398 0 1 0 0-4.796 2.398 2.398 0 0 0 0 4.796zM24.432 60.278a2.085 2.085 0 1 0 0-4.17 2.085 2.085 0 0 0 0 4.17zm5.554.719a2.422 2.422 0 1 0 0-4.844 2.422 2.422 0 0 0 0 4.844zm19.572-21.353a2.331 2.331 0 1 0 0-4.662 2.331 2.331 0 0 0 0 4.662zM25.117 55.089a1.807 1.807 0 1 0 0-3.614 1.807 1.807 0 0 0 0 3.614zm72.846-26.226a1.977 1.977 0 1 0 0-3.954 1.977 1.977 0 0 0 0 3.954zm-55.036 8.301a1.799 1.799 0 1 0 0-3.598 1.799 1.799 0 0 0 0 3.598z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M34.205 58.834a2.523 2.523 0 1 0 0-5.047 2.523 2.523 0 0 0 0 5.047zm82.021-17.17a2.472 2.472 0 1 0 0-4.945 2.472 2.472 0 0 0 0 4.945zm-62.758 86.131a2.54 2.54 0 1 0 0-5.081 2.54 2.54 0 0 0 0 5.08zM32.16 73.32a2.014 2.014 0 1 0 0-4.028 2.014 2.014 0 0 0 0 4.029zm25.758 53.977a1.456 1.456 0 1 0 0-2.911 1.456 1.456 0 0 0 0 2.911zm39.338 4.826a1.474 1.474 0 1 0 0-2.949 1.474 1.474 0 0 0 0 2.95zm27.883-90.753a1.7 1.7 0 1 0 0-3.401 1.7 1.7 0 0 0 0 3.4zm-58.781-4.209a1.894 1.894 0 1 0 0-3.788 1.894 1.894 0 0 0 0 3.788zm24.894 98.092a1.225 1.225 0 1 0 0-2.45 1.225 1.225 0 0 0 0 2.45zm16.679-100.221a1.586 1.586 0 1 0 0-3.172 1.586 1.586 0 0 0 0 3.172zM31.03 81.784a2.415 2.415 0 1 0 0-4.83 2.415 2.415 0 0 0 0 4.83zm94.261 30.334a2.022 2.022 0 1 0 0-4.044 2.022 2.022 0 0 0 0 4.044zm-18.041-81.06a2.587 2.587 0 1 0 0-5.174 2.587 2.587 0 0 0 0 5.174zm-31.895 4.408a2.313 2.313 0 1 0 0-4.625 2.313 2.313 0 0 0 0 4.625zm48.875 11.181a1.984 1.984 0 1 0 0-3.969 1.984 1.984 0 0 0 0 3.969zm-27.864 91.591a1.848 1.848 0 1 0 0-3.696 1.848 1.848 0 0 0 0 3.696zM26.615 84.51a2.329 2.329 0 1 0 0-4.658 2.329 2.329 0 0 0 0 4.658zm74.893 50.825a1.988 1.988 0 1 0 0-3.977 1.988 1.988 0 0 0 0 3.977zM29.51 64.562a1.164 1.164 0 1 0 0-2.328 1.164 1.164 0 0 0 0 2.328z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M29.745 77.178a2.099 2.099 0 1 0 0-4.198 2.099 2.099 0 0 0 0 4.198zm24.222-44.885a2.173 2.173 0 1 0 0-4.345 2.173 2.173 0 0 0 0 4.345zm71.138 73.096a1.561 1.561 0 1 0 0-3.123 1.561 1.561 0 0 0 0 3.123zm-52.119 29.643a1.522 1.522 0 1 0 0-3.044 1.522 1.522 0 0 0 0 3.044zm57.89-21.716a2.394 2.394 0 1 0 0-4.788 2.394 2.394 0 0 0 0 4.788zM116.06 80.498a2.199 2.199 0 1 0 0-4.397 2.199 2.199 0 0 0 0 4.397zm-37.75 60.298a2.23 2.23 0 1 0 0-4.46 2.23 2.23 0 0 0 0 4.46zm-41.419-57.84a1.498 1.498 0 1 0 0-2.996 1.498 1.498 0 0 0 0 2.996zm65.401 46.547a1.657 1.657 0 1 0 0-3.314 1.657 1.657 0 0 0 0 3.314zm-26.452 2.119a1.478 1.478 0 1 0 0-2.957 1.478 1.478 0 0 0 0 2.957zm7.66 6.662a2.372 2.372 0 1 0 0-4.743 2.372 2.372 0 0 0 0 4.743zM69.826 28.75a1.552 1.552 0 1 0 0-3.103 1.552 1.552 0 0 0 0 3.104zM45.09 92.906a1.163 1.163 0 1 0 0-2.326 1.163 1.163 0 0 0 0 2.326zm22.542 38.39a2.326 2.326 0 1 0 0-4.651 2.326 2.326 0 0 0 0 4.65zm-33.564-20.862a1.698 1.698 0 1 0 0-3.395 1.698 1.698 0 0 0 0 3.395zm80.797-76.904a1.953 1.953 0 1 0 0-3.906 1.953 1.953 0 0 0 0 3.905zm-7.619 98.859a2.151 2.151 0 1 0 0-4.302 2.151 2.151 0 0 0 0 4.302zM65.49 25.617a2.428 2.428 0 1 0 0-4.857 2.428 2.428 0 0 0 0 4.857zm38.093 2.319a2.245 2.245 0 1 0 0-4.491 2.245 2.245 0 0 0 0 4.49zM66.167 85.307a2.134 2.134 0 1 0 0-4.269 2.134 2.134 0 0 0 0 4.269zm-2.103 51.724a2.436 2.436 0 1 0 0-4.872 2.436 2.436 0 0 0 0 4.872zM54.545 25.542a1.799 1.799 0 1 0 0-3.598 1.799 1.799 0 0 0 0 3.598zM76.38 127.07a2.551 2.551 0 1 0-.001-5.103 2.551 2.551 0 0 0 0 5.102zm-17.658 5.378a1.88 1.88 0 1 0 0-3.76 1.88 1.88 0 0 0 0 3.76zm71.287-69.692a1.98 1.98 0 1 0 0-3.959 1.98 1.98 0 0 0 0 3.96zM58.865 24.151a1.984 1.984 0 1 0 0-3.968 1.984 1.984 0 0 0 0 3.968zm-30.19 63.466a1.189 1.189 0 1 0 0-2.377 1.189 1.189 0 0 0 0 2.377zm84.145 43.878a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8zM89.45 21.664a2.328 2.328 0 1 0 0-4.656 2.328 2.328 0 0 0 0 4.656zM24.969 95.799a1.569 1.569 0 1 0 0-3.138 1.569 1.569 0 0 0 0 3.138zm16.382 11.617a1.976 1.976 0 1 0 0-3.951 1.976 1.976 0 0 0 0 3.951zm26.038 18.918a2.037 2.037 0 1 0 0-4.074 2.037 2.037 0 0 0 0 4.074zm-5.226 2.541a1.872 1.872 0 1 0 0-3.744 1.872 1.872 0 0 0 0 3.744zM50.51 133.09a1.32 1.32 0 1 0 0-2.639 1.32 1.32 0 0 0 0 2.638z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M128.254 117.388a2.467 2.467 0 1 0 0-4.933 2.467 2.467 0 0 0 0 4.933zm-48.159-95.23a1.812 1.812 0 1 0 0-3.624 1.812 1.812 0 0 0 0 3.624zM71.89 129.644a2.458 2.458 0 1 0 0-4.916 2.458 2.458 0 0 0 0 4.916zM94.1 24.37a1.386 1.386 0 1 0 0-2.772 1.386 1.386 0 0 0 0 2.771zm-4.627 2.126a2.57 2.57 0 1 0 0-5.139 2.57 2.57 0 0 0 0 5.14zm10.197-2.493a1.776 1.776 0 1 0 0-3.551 1.776 1.776 0 0 0 0 3.55zm-53.588 77.915a1.928 1.928 0 1 0 0-3.856 1.928 1.928 0 0 0 0 3.856zm70.854 18.95a2.046 2.046 0 1 0 0-4.092 2.046 2.046 0 0 0 0 4.092zm20.53-50.64a1.497 1.497 0 1 0 0-2.993 1.497 1.497 0 0 0 0 2.993zM19.995 67.316a2.23 2.23 0 1 0 0-4.461 2.23 2.23 0 0 0 0 4.46zm-.626 18.424a1.992 1.992 0 1 0 0-3.984 1.992 1.992 0 0 0 0 3.984zm51.233-61.89a1.2 1.2 0 1 0 0-2.402 1.2 1.2 0 0 0 0 2.402zm-34.094 82.053a1.544 1.544 0 1 0 0-3.09 1.544 1.544 0 0 0 0 3.09zm30.447-4.705a1.812 1.812 0 1 0 0-3.624 1.812 1.812 0 0 0 0 3.624zm44.9-71.851a1.45 1.45 0 1 0 0-2.898 1.45 1.45 0 0 0 0 2.898zM84.77 22.098a2.096 2.096 0 1 0 0-4.192 2.096 2.096 0 0 0 0 4.192zM59.44 139.1a2.305 2.305 0 1 0 0-4.61 2.305 2.305 0 0 0 0 4.61zm-18.699-26.792a2.222 2.222 0 1 0 0-4.443 2.222 2.222 0 0 0 0 4.443zM22.653 81.907a1.959 1.959 0 1 0 0-3.917 1.959 1.959 0 0 0 0 3.917zm-.591 8.267a2.386 2.386 0 1 0 0-4.772 2.386 2.386 0 0 0 0 4.772zm3.043-12a1.879 1.879 0 1 0 0-3.757 1.879 1.879 0 0 0 0 3.757zm29.898 57.376a1.84 1.84 0 1 0 0-3.682 1.84 1.84 0 0 0 0 3.681zm-11.169-8.272a1.998 1.998 0 1 0 0-3.997 1.998 1.998 0 0 0 0 3.997zm64.048-7.38a1.341 1.341 0 1 0 0-2.682 1.341 1.341 0 0 0 0 2.682zm-71.176-4.226a2.185 2.185 0 1 0 0-4.37 2.185 2.185 0 0 0 0 4.37z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M48.232 129.766a2.379 2.379 0 1 0 0-4.758 2.379 2.379 0 0 0 0 4.758zm75.551-69.763a1.336 1.336 0 1 0 0-2.671 1.336 1.336 0 0 0 0 2.67zM19.147 78.405a1.472 1.472 0 1 0 0-2.944 1.472 1.472 0 0 0 0 2.944zm10.384 35.637a1.631 1.631 0 1 0 0-3.262 1.631 1.631 0 0 0 0 3.262zm.261-7.102a2.512 2.512 0 1 0 0-5.024 2.512 2.512 0 0 0 0 5.024zm-5.664-6.076a1.862 1.862 0 1 0 0-3.724 1.862 1.862 0 0 0 0 3.724zm44.486 37.209a1.415 1.415 0 1 0 0-2.83 1.415 1.415 0 0 0 0 2.83zm-26.43-19.497a1.24 1.24 0 1 0 0-2.48 1.24 1.24 0 0 0 0 2.48zm30.768 21.762a1.89 1.89 0 1 0 0-3.78 1.89 1.89 0 0 0 0 3.78zm-49.343-34.702a2.12 2.12 0 1 0 0-4.24 2.12 2.12 0 0 0 0 4.24zm11.374 15a2.358 2.358 0 1 0 0-4.716 2.358 2.358 0 0 0 0 4.716zm4.657 2.784a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88zM20.4 95.11a2.548 2.548 0 1 0-.001-5.095 2.548 2.548 0 0 0 0 5.095zm16.513-41.188a2.415 2.415 0 1 0 0-4.83 2.415 2.415 0 0 0 0 4.83zm83.234 72.866a2.53 2.53 0 1 0 0-5.06 2.53 2.53 0 0 0 0 5.06z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+<path d="M25.601 110.443a2.478 2.478 0 1 0 0-4.957 2.478 2.478 0 0 0 0 4.957zm19.406 12.229a1.78 1.78 0 1 0 0-3.561 1.78 1.78 0 0 0 0 3.56zm78.466-5.364a2.215 2.215 0 1 0 0-4.429 2.215 2.215 0 0 0 0 4.43zM28.751 92.87a1.632 1.632 0 1 0 0-3.265 1.632 1.632 0 0 0 0 3.264z" style="fill:#afdad2;stroke:#fff;stroke-width:.25" clip-path="url(#p40fec8cee6)" />
+</g>
+</g>
+<g id="axes_2">
+<g id="text_1" transform="matrix(1.2 0 0 -1.2 155.52 128.878)" style="fill:#444876">
+<defs>
+<path id="Avenir-Book-115" d="M32 35.703q-1.5 2.89-4 4.594Q25.5 42 21.906 42q-1.703 0-3.453-.406-1.75-.39-3.156-1.25-1.39-.844-2.25-2.14-.844-1.298-.844-3.204 0-3.297 2.297-4.797t6.906-2.61L28.094 26Q33 24.906 36.25 21.547q3.25-3.344 3.25-8.344 0-3.797-1.547-6.547t-4.11-4.5Q31.298.406 28-.39q-3.297-.812-6.703-.812-5.39 0-10.047 2.047-4.656 2.062-7.953 7.062L9 11.796q2-3.202 5.047-5.108 3.047-1.891 7.25-1.891 2 0 4 .453t3.547 1.39q1.562.954 2.5 2.454.953 1.5.953 3.5 0 3.5-2.61 5.047-2.593 1.562-6.28 2.453L17 21.594q-1.203.312-3.25 1-2.047.703-4 2.093-1.953 1.407-3.36 3.657Q5 30.594 5 33.906q0 3.594 1.453 6.297t3.89 4.39q2.454 1.704 5.548 2.548Q19 48 22.297 48q4.906 0 9.094-1.906 4.203-1.89 6.515-6.5z" />
+<path id="Avenir-Book-101" d="M43.594 27q0 6.703-4 10.844Q35.594 42 28.406 42q-3.203 0-6.203-1.25t-5.25-3.36q-2.25-2.093-3.61-4.796Q12 29.906 12 27zm-31.797-5.406q.297-3.5 1.703-6.594t3.703-5.344T22.5 6.094q3-1.297 6.5-1.297 5.297 0 9.14 2.453Q42 9.703 44 12.906l5.094-4.203q-4.188-5.297-9.25-7.61Q34.797-1.202 29-1.202q-5.203 0-9.656 1.844-4.438 1.859-7.64 5.156Q8.5 9.094 6.64 13.594q-1.844 4.5-1.844 9.812 0 5.297 1.797 9.797 1.812 4.5 5 7.797 3.203 3.297 7.5 5.14Q23.406 48 28.406 48q5.297 0 9.485-1.906 4.203-1.89 7.047-5.047 2.859-3.14 4.359-7.39t1.5-9.063v-3z" />
+<path id="Avenir-Book-97" d="M33.797 23.297q-2.5 0-6.25-.25t-7.203-1.203q-3.438-.938-5.89-2.938-2.454-2-2.454-5.5 0-2.312.953-3.969.953-1.64 2.547-2.687t3.547-1.5T23 4.797q3.594 0 6.25 1.203t4.453 3.25 2.64 4.797q.86 2.75.86 5.86v3.39zm3.406 5.406v1.203q0 12.094-12 12.094Q17 42 10.906 36.5l-4 4.703Q13.5 48 26.703 48q3.39 0 6.547-1t5.453-3.047 3.688-5.156q1.406-3.094 1.406-7.39V10.5q0-2.703.25-5.656.25-2.938.547-4.844h-6.39q-.298 1.703-.454 3.703t-.156 3.89h-.188Q34.5 2.907 30.546.844q-3.952-2.046-9.64-2.046-3.11 0-6.015.86Q12 .5 9.75 2.25T6.14 6.547Q4.798 9.094 4.798 12.5q0 5.703 2.953 8.953t7.39 4.844q4.454 1.61 9.5 2 5.063.406 9.266.406z" />
+<path id="Avenir-Book-98" fill-rule="evenodd" d="M33.797 23.406q0 3.89-1.25 7.282-1.25 3.406-3.562 5.906-2.297 2.5-5.547 3.953T32.203 42q-4.11 0-7.516-1.453-3.39-1.453-5.89-3.953t-3.906-5.907q-1.391-3.39-1.391-7.28 0-3.907 1.39-7.313 1.407-3.39 3.907-5.89t5.89-3.954q3.407-1.453 7.516-1.453 4.094 0 7.344 1.453t5.547 3.953q2.312 2.5 3.562 5.89 1.25 3.407 1.25 7.313M7.203 75.594h6.594V39H14q1.594 2.406 3.797 4.094Q20 44.797 22.39 45.89q2.407 1.11 4.954 1.61 2.562.5 4.86.5 5.5 0 10.046-1.86 4.547-1.843 7.844-5.14 3.312-3.297 5.156-7.797t1.844-9.797q0-5.312-1.844-9.812t-5.156-7.797Q46.797 2.5 42.25.64q-4.547-1.844-10.047-1.844-2.297 0-4.86.5-2.546.5-4.952 1.594Q20 2 17.797 3.703T14 7.797h-.203V0H7.203z" />
+<path id="Avenir-Book-111" d="M47.297 23.406q0 3.89-1.25 7.282-1.25 3.406-3.547 5.906t-5.547 3.953T29.593 42q-4.093 0-7.343-1.453t-5.5-3.953-3.5-5.907Q12 27.298 12 23.408q0-3.907 1.25-7.313 1.25-3.39 3.5-5.89t5.5-3.954 7.344-1.453q4.11 0 7.36 1.453t5.546 3.953 3.547 5.89q1.25 3.407 1.25 7.313m7.203 0q0-5.312-1.86-9.812-1.843-4.5-5.14-7.797T39.64.64q-4.546-1.844-10.046-1.844-5.39 0-9.953 1.844-4.547 1.859-7.844 5.156T6.64 13.594q-1.844 4.5-1.844 9.812 0 5.297 1.844 9.797 1.86 4.5 5.157 7.797t7.844 5.14Q24.203 48 29.594 48q5.5 0 10.047-1.86Q44.203 44.298 47.5 41t5.14-7.797q1.86-4.5 1.86-9.797" />
+<path id="Avenir-Book-114" d="M7.906 32.203q0 3.094-.156 6.297t-.25 8.297H14v-8.703h.203q.703 1.906 2 3.656t3.14 3.14q1.86 1.407 4.298 2.25 2.453.86 5.562.86 2.797 0 4.89-.594l-1.296-6.5q-1.297.5-3.797.5-3.797 0-6.5-1.453T18 36.25t-2.656-4.86q-.844-2.593-.844-4.984V0H7.906z" />
+<path id="Avenir-Book-110" d="M13.5 46.797q.203-1.89.25-3.75.047-1.844.047-3.75H14q1.094 1.906 2.797 3.5 1.703 1.61 3.797 2.75 2.11 1.156 4.453 1.797 2.36.656 4.656.656 9 0 13.297-4.75t4.297-13.547V0h-6.594v25.906q0 7.797-2.703 11.938Q35.297 42 28 42q-.5 0-2.797-.406-2.297-.39-4.86-2.203-2.546-1.797-4.546-5.391t-2-10V0H7.203v36.5q0 1.906-.156 4.797-.14 2.906-.344 5.5z" />
+</defs>
+<use xlink:href="#Avenir-Book-115" />
+<use x="42.6" xlink:href="#Avenir-Book-101" />
+<use x="98.2" xlink:href="#Avenir-Book-97" />
+<use x="150.1" xlink:href="#Avenir-Book-98" />
+<use x="211.2" xlink:href="#Avenir-Book-111" />
+<use x="270.5" xlink:href="#Avenir-Book-114" />
+<use x="305.45" xlink:href="#Avenir-Book-110" />
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="p93517fecb0">
+<path d="M7.2 10.861h144v136.678H7.2z" />
+</clipPath>
+<clipPath id="p41adfa82e1">
+<path d="M79.2 142.658A63.46 63.46 0 0 0 142.658 79.2 63.46 63.46 0 0 0 79.2 15.742 63.46 63.46 0 0 0 15.742 79.2 63.46 63.46 0 0 0 79.2 142.658" />
+</clipPath>
+<clipPath id="p40fec8cee6">
+<path d="M-6.224-11.105v82.071l2.44-.123 2.442-.143 2.44-.165 2.441-.188 2.44-.215 2.441-.243 2.441-.276 2.44-.31 2.441-.346 2.441-.386 2.44-.428 2.441-.473 2.441-.519 2.44-.567 2.441-.617 2.441-.667 2.44-.718 2.441-.77 2.441-.819 2.44-.868 2.442-.914 2.44-.957 2.44-.997 2.442-1.032 2.44-1.061 2.44-1.085 2.442-1.1 2.44-1.11 2.44-1.108 2.442-1.1 2.44-1.081 2.441-1.054 2.44-1.016 2.441-.968 2.441-.91 2.44-.845 2.441-.768 2.441-.685 2.44-.593 2.441-.494 2.441-.39 2.44-.283 2.441-.171 2.441-.057 2.44.057 2.441.17 2.441.283 2.44.39 2.441.495 2.441.593 2.44.685 2.442.768 2.44.844 2.44.911 2.442.968 2.44 1.016 2.44 1.054 2.442 1.081 2.44 1.1 2.44 1.109 2.442 1.109 2.44 1.1 2.441 1.085 2.44 1.06 2.441 1.033 2.441.997 2.44.957 2.441.914 2.441.868 2.44.82v-74.918H-6.222" />
+</clipPath>
+</defs>
+</svg>
+<img src="seaborn.svg" alt="Seaborn wordmark" />
+</div>
+<div class="language-copy">
+<p class="language-description">Built on matplotlib with beautiful defaults and statistical helpers.
+</p>
+<p class="language-description">Python is a versatile and intuitive programming language, widely adopted in data science, machine learning, and general-purpose programming for its simplicity and vast capabilities. Seaborn is a powerful Python visualization library built on Matplotlib, a more intricate foundational tool that enables the creation of beautiful, informative statistical graphics with remarkably little code when using Seaborn. Like Python itself, Seaborn emphasizes ease of use while delivering high-impact results.
+</p>
+</div>
+</div>
+</div>
+<div class="component rounded-xl text-center language-card">
+<div class="component-content space-y-4">
+<div class="language-logo mx-auto w-12 h-12 rounded-lg bg-gray-800 border border-gray-700 flex items-center justify-center">
+<svg                  xmlns="http://www.w3.org/2000/svg"                  viewBox="-108.1641 -139.0155 937.4222 834.093"                  preserveAspectRatio="xMidYMid"                  aria-hidden="true"                  focusable="false"                >
+<defs>
+<linearGradient                      id="r-logo-a"                      gradientUnits="userSpaceOnUse"                      gradientTransform="matrix(1.22194 0 0 .81837 -.906 -3)"                      x1=".741"                      y1="3.666"                      x2="590.863"                      y2="593.787"                      spreadMethod="pad"                    >
+<stop offset="0" stop-color="#CBCED0">
+</stop>
+<stop offset="1" stop-color="#84838B">
+</stop>
+</linearGradient>
+<linearGradient                      id="r-logo-b"                      gradientUnits="userSpaceOnUse"                      gradientTransform="matrix(.98995 0 0 1.01015 -.906 -3)"                      x1="301.026"                      y1="151.401"                      x2="703.068"                      y2="553.442"                      spreadMethod="pad"                    >
+<stop offset="0" stop-color="#276DC3">
+</stop>
+<stop offset="1" stop-color="#165CAA">
+</stop>
+</linearGradient>
+</defs>
+<path                    fill="url(#r-logo-a)"                    fill-rule="evenodd"                    d="M360.547 482.937C161.423 482.937 0 374.828 0 241.469 0 108.109 161.423 0 360.547 0c199.125 0 360.547 108.109 360.547 241.469 0 133.359-161.422 241.468-360.547 241.468zm55.188-388.531c-151.352 0-274.047 73.908-274.047 165.078s122.695 165.078 274.047 165.078c151.351 0 263.046-50.529 263.046-165.078 0-114.513-111.695-165.078-263.046-165.078z"                  >
+</path>
+<path                    fill="url(#r-logo-b)"                    fill-rule="evenodd"                    d="M549.094 374s21.822 6.585 34.5 13c4.399 2.226 12.01 6.668 17.5 12.5 5.378 5.712 8 11.5 8 11.5l86 145-139 .062-65-122.062s-13.31-22.869-21.5-29.5c-6.832-5.531-9.745-7.5-16.5-7.5h-33.026l.026 158.974-123 .052V149.938h247s112.5 2.029 112.5 109.062-107.5 115-107.5 115zm-53.5-135.976l-74.463-.048-.037 69.05 74.5-.024s34.5-.107 34.5-35.125c0-35.722-34.5-33.853-34.5-33.853z"                  >
+</path>
+</svg>
+</div>
+<h3 class="font-semibold">R (Ggplot2)
+</h3>
+<div class="language-wordmark ggplot">
+<svg                  version="1.1"                  id="Layer_1"                  xmlns="http://www.w3.org/2000/svg"                  xmlns:xlink="http://www.w3.org/1999/xlink"                  viewBox="0 0 2521 2911"                  aria-hidden="true"                  focusable="false"                >
+<style type="text/css">                    .st0{fill:#F2F2F2;}st1{fill:#FFFFFF;}st2{fill:#E6B35A;}st3{fill:#424242;}st4{fill:#51A7F9;}st5{fill:#A8D6FF;}st6{fill:#0365C0;}st7{fill:#164F86;}st8{fill:#002452;}st9{fill:#000643;}
+</style>
+<g>
+<path class="st0" d="M2340.2,826.2v401.2h80.2V789.1l-17.2-9.9C2387.5,800.9,2365.5,817.2,2340.2,826.2z"/>
+<path class="st0" d="M2164,694.1c0.8-16.1,4.5-31.9,11-46.6l-368.5-212.7v259.9C1925.9,694.5,2045,694.3,2164,694.1z"/>
+<path class="st0" d="M2197,788.8l-204.2,130.4c28.7,67.4-2.7,145.3-70.1,174c-37.5,16-80.4,13.8-116.1-5.9v140h521.6V829.8c-48,11.8-98.6-4-131.3-41.2V788.8z"/>
+<path class="st0" d="M1405.3,1401.8c-73.3,0-132.7-59.3-132.8-132.6c0-10.1,1.1-20.1,3.4-29.9h-9.8v529.6c176.1,0,352.2-0.1,528.3-0.2v-529.4h-259.9c2.3,9.8,3.4,19.8,3.4,29.9C1538,1342.4,1478.6,1401.8,1405.3,1401.8z"/>
+<path class="st0" d="M499.2,1227.3c-38.1-62.6-18.3-144.2,44.3-182.3c55.2-33.6,126.6-22.6,169,26.1V706.7c-156.3-0.1-312.3-0.4-467.9-0.7l-57.3,33.1v488.2L499.2,1227.3z"/>
+<path class="st0" d="M1794.6,694.7V427.8l-528.3-305.1V695C1442.4,695,1618.5,694.9,1794.6,694.7z"/>
+<path class="st0" d="M712.5,435.7L265.4,694c148.7,0.3,297.7,0.5,447.2,0.7V435.7z"/>
+<path class="st0" d="M1254.2,695V123.1L724.5,428.8v265.8C900.8,694.9,1077.4,695,1254.2,695z"/>
+<path class="st0" d="M1405.3,1136.4c38.1-0.1,74.3,16.3,99.5,44.9l244.9-156.1c-25.9-58-7-126.2,45-162.6V706.7c-176,0.2-352.1,0.3-528.3,0.3v325.6l81.3,117.1C1365.6,1141,1385.3,1136.5,1405.3,1136.4z"/>
+<path class="st0" d="M1970.8,884.1l204-130.1c-6.6-15.2-10.3-31.5-10.9-48c-118.9,0.2-238,0.4-357.3,0.5v148.4C1861.3,824.7,1929.8,836.8,1970.8,884.1L1970.8,884.1z"/>
+<path class="st0" d="M187.3,1239.3V1371c18.7,7.9,35.3,20,48.6,35.3l253.7-167L187.3,1239.3z"/>
+<path class="st0" d="M2340.2,1768h80.2v-528.3h-80.2V1768z"/>
+<path class="st0" d="M175.3,746l-74.9,43.1v438.3h74.9V746z"/>
+<path class="st0" d="M983,851.7c0-73.3,59.4-132.7,132.7-132.7c73.3,0,132.7,59.4,132.7,132.7c0,36.2-14.8,70.9-41,95.9l46.9,67.6V707h-9.6c-173.5,0-346.8-0.1-520-0.3v377.9l270.3-178C987.1,889.3,983,870.6,983,851.7z"/>
+<path class="st0" d="M1313.7,1173.3l-47.5-68.6v122.4h13.2C1286.3,1206.7,1298,1188.2,1313.7,1173.3z"/>
+<path class="st0" d="M1115.7,984.4c-37.4,0-73-15.7-98.2-43.4l-277,182.4c3.1,11.4,4.6,23.1,4.6,34.8c0,24.4-6.7,48.3-19.4,69.1h528.3v-139.7l-80.7-116.3C1155.4,979.9,1135.6,984.4,1115.7,984.4z"/>
+<path class="st0" d="M612.5,1290.8c-30,0-59.1-10.1-82.5-28.8l-272.1,179.2c28.8,67.5-2.6,145.5-70.1,174.2c-0.1,0.1-0.3,0.1-0.4,0.2V1768c174.7,0.3,349.7,0.5,525.2,0.6v-523.3C687.4,1274.3,650.8,1290.9,612.5,1290.8z"/>
+<path class="st0" d="M1772,1059.7L1526.9,1216c1.6,3.7,3.1,7.4,4.3,11.2h263.4v-147.5C1786.3,1073.9,1778.7,1067.2,1772,1059.7z"/>
+<path class="st0" d="M1806.6,1780.5v528.9h300.8l220.8-127.5V1780C2154.7,1780.4,1980.8,1780.5,1806.6,1780.5z"/>
+<polygon class="st0" points="1806.6,2483.1 2086.6,2321.4 1806.6,2321.4 "/>
+<path class="st0" d="M1254.2,1768.8v-529.6H724.5v529.4C900.9,1768.7,1077.5,1768.8,1254.2,1768.8z"/>
+<polygon class="st0" points="1266.2,2321.4 1266.2,2795.1 1794.6,2490 1794.6,2321.4 "/>
+<polygon class="st0" points="724.5,2321.4 724.5,2489 1254.2,2794.8 1254.2,2321.4 "/>
+<path class="st0" d="M1246.1,1780.8c-173.9,0-347.8-0.1-521.5-0.2v528.8h529.6v-528.6H1246.1z"/>
+<path class="st0" d="M2340.2,1780v395.1l80.2-46.3v-348.9L2340.2,1780z"/>
+<path class="st0" d="M1266.2,2309.4h528.3v-528.9c-176,0.1-352.1,0.2-528.3,0.2V2309.4z"/>
+<path class="st0" d="M1806.6,1239.2v529.4c174.2-0.1,348.1-0.3,521.6-0.6v-528.6L1806.6,1239.2z"/>
+<path class="st0" d="M175.3,1620c-24.3,7.5-50.3,7.9-74.9,1.2v146.7h74.9V1620z"/>
+<path class="st0" d="M100.5,1779.9v348.8l74.9,43.2V1780L100.5,1779.9z"/>
+<path class="st0" d="M175.3,1366.6v-127.2h-74.9v126C125,1358.6,151,1359.1,175.3,1366.6z"/>
+<polygon class="st0" points="434.4,2321.4 712.5,2482 712.5,2321.4 "/>
+<path class="st0" d="M712.5,1780.5c-175.4-0.1-350.5-0.3-525.2-0.6v398.8l226.2,130.6h299V1780.5z"/>
+<path class="st1" d="M712.5,1071.1c3.9,4.5,7.5,9.3,10.8,14.3l1.2-0.8V706.7c173.1,0.2,346.4,0.3,520,0.3h9.6v308.3l12,17.3V707c176.1,0,352.2-0.1,528.3-0.3v155.9c3.9-2.7,7.9-5.3,12-7.5V706.7c119.2,0,238.3-0.2,357.3-0.5c0-1.7,0-3.4,0-5.1c0-2.3,0-4.6,0.3-6.9c-118.9,0.2-238.1,0.4-357.4,0.5v-260l-12-6.9v266.8c-176,0.2-352.1,0.3-528.3,0.3V122.8l-5.7-3.4l0,0l-6.3,3.6v572c-176.7,0-353.3-0.1-529.6-0.3V428.8l-12,6.9v258.8c-149.4-0.1-298.4-0.4-447.2-0.7l-20.6,12c155.5,0.3,311.5,0.6,467.9,0.7L712.5,1071.1z"/>
+<path class="st1" d="M175.3,1366.6c4.1,1.3,8.1,2.7,12,4.4v-131.7h302.3l12.2-8c-0.9-1.3-1.7-2.6-2.5-4H187.3V739l-12,6.9v481.5h-74.9v12h74.9V1366.6z"/>
+<path class="st1" d="M2420.5,1779.9v-12h-80.2v-528.5h80.2v-12h-80.2V826.2c-3.9,1.4-7.9,2.6-12,3.4v397.6h-521.6v-140c-4.1-2.3-8.1-4.8-12-7.5v147.5h-263.4c1.3,3.9,2.4,7.9,3.4,12h260v529.4c-176,0.1-352.1,0.2-528.3,0.2v-529.6h9.6c1-4.1,2.1-8.1,3.4-12h-13.2v-122.5l-12-17.2v139.8H725.8c-3.9,6.4-8.3,12.4-13.2,18v523.3c-175.4-0.1-350.5-0.3-525.2-0.6v-152.4c-3.9,1.6-7.9,3.1-12,4.4v148h-74.9v12h74.9v391.9l12,6.9V1780c174.7,0.3,349.7,0.5,525.2,0.6v528.8h-299l20.8,12h278.2V2482l12,6.9v-167.5h529.6v473.4l6.3,3.4l5.7-3.4v-473.4h528.3V2490l12-6.9v-161.7h280l20.8-12h-300.8v-528.9c174.2-0.1,348.1-0.3,521.6-0.6v402l12-6.9V1780L2420.5,1779.9z M724.5,1239.2h529.6v529.6c-176.7,0-353.2-0.1-529.6-0.2V1239.2z M724.5,2309.4v-528.9c173.7,0,347.5,0.1,521.5,0.2h8.1v528.7L724.5,2309.4z M1258.8,2171.3c0.8-1,1.6-2,2.3-3.1h1.1C1261,2169.3,1259.9,2170.3,1258.8,2171.3z M1794.5,2309.4h-528.3v-528.6c176.1,0,352.2-0.1,528.3-0.2V2309.4z M1806.5,1768.6v-529.4h521.6V1768c-173.5,0.3-347.3,0.5-521.5,0.6H1806.5z"/>
+<path class="st2" d="M1258.8,2171.3c1-1,2.1-2,3.2-3.1h-0.9C1260.5,2169.3,1259.7,2170.3,1258.8,2171.3z"/>
+<path class="st3" d="M501.8,1231.3l-12.2,8l-253.7,167c9.1,10.4,16.5,22.2,21.9,34.9L530,1262C519,1253.3,509.5,1242.9,501.8,1231.3z"/>
+<path class="st3" d="M1526.9,1216l245.1-156.3c-9.2-10.3-16.8-21.9-22.4-34.5l-244.9,156.1C1513.9,1191.6,1521.3,1203.3,1526.9,1216z"/>
+<path class="st3" d="M1992.8,919L2197,788.6c-9.1-10.3-16.6-22-22.2-34.5l-204,130.1C1979.9,894.5,1987.3,906.3,1992.8,919z"/>
+<path class="st3" d="M1347.5,1149.7l-81.3-117l-12-17.3l-46.9-67.7c-10,9.6-21.4,17.5-33.8,23.5l80.7,116.4l12,17.2l47.5,68.6C1323.6,1163.7,1335,1155.7,1347.5,1149.7z"/>
+<path class="st3" d="M740.5,1123.4l277-182.4c-9.3-10.2-16.9-21.8-22.6-34.3l-270.3,178l-1.2,0.8C731,1097.1,736.8,1109.9,740.5,1123.4z"/>
+<path class="st4" d="M740.5,1123.4c-19.3-70.7-92.2-112.4-162.9-93.1s-112.4,92.2-93.1,162.9c3.3,12,8.2,23.5,14.7,34.2c0.8,1.3,1.7,2.7,2.5,4c40.4,61.2,122.6,78,183.8,37.7C733.4,1237.4,755.5,1178.6,740.5,1123.4z"/>
+<path class="st5" d="M175.3,1620c4.1-1.3,8.1-2.7,12-4.4c67.6-28.5,99.2-106.4,70.7-174c-0.1-0.1-0.1-0.3-0.2-0.4c-5.4-12.7-12.8-24.5-21.9-34.9c-13.3-15.3-29.9-27.4-48.6-35.3c-3.9-1.6-7.9-3.1-12-4.4c-24.3-7.6-50.3-8-74.9-1.2v255.7C125,1627.9,151,1627.5,175.3,1620z"/>
+<path class="st6" d="M1248.5,851.7c0.2-73.5-59.2-133.3-132.8-133.5s-133.3,59.2-133.5,132.8c-0.2,73.5,59.2,133.3,132.8,133.5c34.4,0.1,67.5-13.1,92.4-36.9C1233.6,922.6,1248.4,888,1248.5,851.7z"/>
+<path class="st7" d="M1504.7,1181.3c-48.5-54.9-132.3-60.1-187.3-11.7c-17.5,15.5-30.7,35.3-38.1,57.6c-1.3,3.9-2.4,7.9-3.4,12c-16.6,71.4,27.8,142.7,99.2,159.3c71.4,16.6,142.7-27.8,159.3-99.2c4.6-19.8,4.6-40.3,0-60.1c-1-4.1-2.1-8.1-3.4-12s-2.7-7.5-4.3-11.2C1521.2,1203.3,1513.8,1191.6,1504.7,1181.3z"/>
+<path class="st8" d="M2003.3,971.1c0-73.3-59.4-132.7-132.7-132.7c-22.4,0-44.5,5.7-64.2,16.5c-4.1,2.3-8.1,4.8-12,7.5c-60,42-74.5,124.7-32.5,184.6c8.9,12.7,19.9,23.7,32.5,32.5c3.9,2.7,7.9,5.2,12,7.5c64.1,35.5,144.8,12.2,180.3-51.9C1997.6,1015.7,2003.3,993.6,2003.3,971.1z"/>
+<path class="st9" d="M2163.7,701c0,1.7,0,3.4,0,5.1c2.9,73.2,64.6,130.2,137.8,127.3c9-0.4,17.9-1.6,26.6-3.8c4.1-1,8.1-2.2,12-3.4c25.3-8.9,47.3-25.2,63.2-46.9l-228.4-131.8c-6.5,14.7-10.3,30.5-11,46.6C2163.9,696.4,2163.7,698.7,2163.7,701z"/>
+<path class="st3" d="M2420.5,669.7l-953.1-550.3L1260.5,0l-206.9,119.5L100.5,669.7L0,727.8v1455.5l100.5,58l965,557.1l195,112.6l195-112.6l964.9-557.1l100.5-58V727.8L2420.5,669.7z M2340.2,2175.1l-12,6.9l-220.8,127.5l-20.8,12l-280,161.7l-12,6.9L1266.2,2795l-5.7,3.4l-6.3-3.4L724.5,2489l-12-6.9l-278.2-160.7l-20.8-12l-226.2-130.6l-12-6.9l-74.9-43.3V789.1l74.9-43.2l12-6.9l57.3-33.1l20.6-12l447.3-258.2l12-6.9l529.6-305.7l6.3-3.6l0,0l5.7,3.4l528.3,305.1l12,6.9L2175,647.5l228.4,131.8l17.2,9.9v1339.4L2340.2,2175.1z"/>
+<path class="st3" d="M679.2,1755.8c-1.1,20.3-2.2,43.1-2.2,77.4v163.5c0,64.6-12.1,104.2-37.7,128.6c-25.8,25.6-63.1,33.8-96.6,33.8c-31.8,0-67-8.1-88.4-23.3l12-39c23.3,14.7,50.4,22.4,77.9,22.1c49.4,0,85.8-27.4,85.8-98.3v-31.4h-1.1c-14.8,26.2-43.4,47.1-84.5,47.1c-65.9,0-113.2-59.4-113.2-137.2c0-95.4,58.7-149.5,119.7-149.5c46.1,0,71.4,25.6,82.9,48.9h1.1l2.2-42.5L679.2,1755.8z M629.2,1866.9c0.3-7.8-0.6-15.7-2.7-23.3c-8.8-29.7-32.4-54.1-67.5-54.1c-46.1,0-78.9,41.2-78.9,106.4c0,55.3,26.3,101.2,78.5,101.2c29.6,0,56.5-19.8,67-52.4c2.6-8.9,3.9-18.2,3.8-27.4L629.2,1866.9z"/>
+<path class="st3" d="M968.5,1755.8c-1.1,20.3-2.2,43.1-2.2,77.4v163.5c0,64.6-12.1,104.2-37.7,128.6c-25.8,25.6-63.1,33.8-96.6,33.8c-31.8,0-67-8.1-88.4-23.3l12.1-39c23.3,14.7,50.2,22.4,77.7,22.1c49.4,0,85.8-27.4,85.8-98.3v-31.4H918c-14.8,26.2-43.4,47.1-84.5,47.1c-65.9,0-113.2-59.4-113.2-137.2c0-95.4,58.7-149.5,119.7-149.5c46.1,0,71.4,25.6,82.9,48.9h1.1l2.2-42.5L968.5,1755.8z M918.5,1866.9c0.3-7.8-0.6-15.7-2.7-23.3c-8.8-29.7-32.4-54.1-67.5-54.1c-46.1,0-78.9,41.2-78.9,106.4c0,55.3,26.3,101.2,78.5,101.2c29.6,0,56.5-19.8,67-52.4c2.6-8.9,3.9-18.2,3.8-27.4L918.5,1866.9z"/>
+<path class="st3" d="M1025.5,1847.7c0-36.1-1.1-65.2-2.2-91.9h43.4l2.2,48.3h1.2c19.8-34.3,51-54.7,94.4-54.7c64.2,0,112.5,57.6,112.5,143.1c0,101.2-58.3,151.3-120.8,151.3c-35.2,0-65.9-16.3-81.8-44.2h-1.1v153h-47.9V1847.7z M1073.2,1922.8c0.1,7,0.9,14.1,2.2,21c8.8,35.5,37.7,59.9,72.5,59.9c51,0,80.7-44.2,80.7-108.8c0-56.4-28-104.7-78.9-104.7c-32.9,0-63.7,25-73,63.4c-2,6.8-3.1,13.9-3.4,21L1073.2,1922.8z"/>
+<path class="st3" d="M1320.3,1624.3h48.3v413.1h-48.3V1624.3z"/>
+<path class="st3" d="M1672.7,1894.3c0,104.2-68.1,149.5-132.3,149.5c-72,0-127.4-55.9-127.4-144.9c0-94.3,58.3-149.5,131.7-149.5C1621.1,1749.4,1672.7,1808.2,1672.7,1894.3z M1461.9,1897.2c0,61.8,33.5,108.2,80.7,108.2c46.1,0,80.7-46,80.7-109.4c0-47.7-22.5-108.2-79.6-108.2C1486.6,1787.8,1461.9,1843.7,1461.9,1897.2z"/>
+<path class="st3" d="M1774.3,1674.9v80.9h69.2v39h-69.2v151.9c0,34.9,9.3,54.7,36.2,54.7c9.4,0.2,18.9-1,28-3.4l2.2,38.4c-9.3,4-24,6.9-42.8,6.9c-22.5,0-40.6-7.5-52.1-21.5c-13.7-15.1-18.7-40.1-18.7-73.3v-153.6h-41.2v-39h41.2v-67.5L1774.3,1674.9z"/>
+<path class="st3" d="M1864.8,2037.4V2006l37.7-39c91.1-91.9,132.3-140.7,132.8-197.8c0-38.4-17.6-73.9-70.8-73.9c-32.4,0-59.3,17.5-75.8,32l-15.2-36c27.8-24.8,63.8-38.4,101-38.4c76.8,0,109.2,55.9,109.2,110c0,69.8-47.8,126.3-123,203.1l-28.5,27.9v1.2h160.3v42.5L1864.8,2037.4z"/>
+</g>
+</svg>
+</div>
+<div class="language-copy">
+<p class="language-description">Elegant grammar of graphics for layered plots and statistical summaries.
+</p>
+<p class="language-description">R is a programming language crafted by statisticians for statisticians, serving as the leading alternative to Python for data analysis and visualization, especially in scientific applications. ggplot2 is R's premier plotting package, leveraging a layered grammar of graphics to produce complex, publication-ready charts with elegance and precision. R blends a sharp focus on statistical programming with intuitive ease, making it accessible even for those with limited prior coding experience.
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body>
+</html>
+
