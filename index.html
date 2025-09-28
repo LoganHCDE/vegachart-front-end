@@ -302,7 +302,7 @@
                     </div>
                     <div class="component-content">
                         <p class="text-sm text-gray-400 mb-4">Upload a file to begin.</p>
-                        <div id="upload-dropzone" class="bg-gray-800 border-2 border-dashed border-gray-600 rounded-lg p-6 text-center cursor-pointer hover:border-emerald-400 transition-colors">
+                        <div id="upload-dropzone" tabindex="0" role="button" aria-label="Upload data file. Click or drop a file here." class="bg-gray-800 border-2 border-dashed border-gray-600 rounded-lg p-6 text-center cursor-pointer hover:border-emerald-400 transition-colors">
                             <svg class="mx-auto h-12 w-12 text-gray-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                             <p class="mt-2 text-sm text-gray-400"><span class="font-medium text-emerald-400">Click to upload</span> or drag and drop</p>
                             <p class="text-xs text-gray-500">Supports CSV, TSV, JSON and XLS </p>
@@ -1041,6 +1041,8 @@
           pie: 'Pie Chart',
           histogram: 'Histogram',
         };
+
+        const CHART_TYPE_REQUIRED_MESSAGE = 'Please Select Chart Type';
 
         const SINGLE_VAR_OPTION_VALUE = '__single__';
         const SINGLE_VAR_OPTION_TEXT = 'Single Variable Only';
@@ -2791,22 +2793,51 @@ ggplot(data, aes(category, value, fill = category)) +
           }
           // Refresh code preview (updates Python code with suggested file name)
           tryUpdateCodePreview();
+          // Broadcast a lightweight event for other scripts to hook into
+          try {
+            const ev = new CustomEvent('vc:file-selected', { detail: { file } });
+            window.dispatchEvent(ev);
+          } catch (_) {}
         }
 
         if (dropzone && fileInput) {
+          // Click or keyboard activates the file picker
           dropzone.addEventListener('click', () => fileInput.click());
-          dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-emerald-400'); });
-          dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-emerald-400'));
+          dropzone.addEventListener('keydown', (e) => {
+            // Open file dialog on Enter or Space for keyboard users
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              fileInput.click();
+            }
+          });
+
+          // Provide visual feedback for drag operations and prefer copy dropEffect
+          dropzone.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            try { if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy'; } catch(_){}
+            dropzone.classList.add('border-emerald-400', 'ring-2', 'ring-emerald-400');
+          });
+          dropzone.addEventListener('dragover', (e) => { e.preventDefault(); try { if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy'; } catch(_){}; dropzone.classList.add('border-emerald-400', 'ring-2', 'ring-emerald-400'); });
+          const clearDropVisual = () => dropzone.classList.remove('border-emerald-400', 'ring-2', 'ring-emerald-400');
+          dropzone.addEventListener('dragleave', (e) => { e.preventDefault(); clearDropVisual(); });
+          dropzone.addEventListener('dragend', clearDropVisual);
+
           dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropzone.classList.remove('border-emerald-400');
-            const file = e.dataTransfer.files && e.dataTransfer.files[0];
-            handleFile(file);
+            clearDropVisual();
+            const file = (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) || null;
+            if (file) handleFile(file);
           });
+
+          // When file input changes (picker), handle the chosen file
           fileInput.addEventListener('change', (e) => {
             const file = e.target.files && e.target.files[0];
-            handleFile(file);
+            if (file) handleFile(file);
           });
+
+          // Prevent the browser from navigating away when files are dropped outside the dropzone
+          window.addEventListener('dragover', (e) => { e.preventDefault(); });
+          window.addEventListener('drop', (e) => { e.preventDefault(); });
         }
 
         // --- Chart generation ---
@@ -3191,7 +3222,7 @@ ggplot(data, aes(category, value, fill = category)) +
           }
           // If data exists but no chart type chosen, surface chart type error
           if (!chartType) {
-            throw new Error('Please Select Chart Type');
+            throw new Error(CHART_TYPE_REQUIRED_MESSAGE);
           }
 
           let data = [...uploadedData]; // Make a mutable copy
@@ -4224,7 +4255,11 @@ ggplot(data, aes(category, value, fill = category)) +
             } catch(_) {}
           }
 
-          const chartType = typeSel?.value || 'bar';
+          const chartTypeValue = typeSel?.value || '';
+          const chartType = chartTypeValue.trim();
+          if (!chartType) {
+            throw new Error(CHART_TYPE_REQUIRED_MESSAGE);
+          }
           const histBinCount = readHistogramBinCount();
           const suggested = (window.VC_LAST_FILE && window.VC_LAST_FILE.name) ? window.VC_LAST_FILE.name : 'your_data.csv';
 
@@ -4788,7 +4823,11 @@ ggplot(data, aes(category, value, fill = category)) +
           const nBins = parseInt(document.getElementById('group-by-bins')?.value, 10) || 5;
           const hueIsContinuous = !!legendVar && groupByDataType === 'continuous';
 
-          const chartType = typeSel?.value || 'bar';
+          const chartTypeValue = typeSel?.value || '';
+          const chartType = chartTypeValue.trim();
+          if (!chartType) {
+            throw new Error(CHART_TYPE_REQUIRED_MESSAGE);
+          }
           const histBinCount = readHistogramBinCount();
           const suggested = (window.VC_LAST_FILE && window.VC_LAST_FILE.name) ? window.VC_LAST_FILE.name : 'your_data.csv';
 
@@ -5464,10 +5503,15 @@ ggplot(data, aes(category, value, fill = category)) +
           const selectedLang = document.querySelector('.library-btn.active')?.dataset.lang;
           if (selectedLang !== 'R') return;
           let code = '';
+          let chartTypeError = '';
           try {
             code = rCodeFromInputs();
-          } catch(_) {
+          } catch (err) {
+            chartTypeError = (typeof err?.message === 'string') ? err.message : '';
             code = rDefaultTemplate();
+          }
+          if (chartTypeError === CHART_TYPE_REQUIRED_MESSAGE) {
+            notifyChartTypeMissing();
           }
           const ed = document.getElementById('code-editor');
           if (!ed) return;
@@ -5492,10 +5536,15 @@ ggplot(data, aes(category, value, fill = category)) +
           const selectedLang = document.querySelector('.library-btn.active')?.dataset.lang;
           if (selectedLang !== 'Python') return;
           let code = '';
+          let chartTypeError = '';
           try {
             code = pyCodeFromInputs();
-          } catch(_) {
+          } catch (err) {
+            chartTypeError = (typeof err?.message === 'string') ? err.message : '';
             code = pyDefaultTemplate();
+          }
+          if (chartTypeError === CHART_TYPE_REQUIRED_MESSAGE) {
+            notifyChartTypeMissing();
           }
           const ed = document.getElementById('code-editor');
           if (!ed) return;
@@ -6198,6 +6247,32 @@ ggplot(data, aes(category, value, fill = category)) +
           }
           return 'vega_chart';
         }
+        let lastChartTypeToastAt = 0;
+        function notifyChartTypeMissing() {
+          const message = CHART_TYPE_REQUIRED_MESSAGE;
+          try {
+            setChartDisplayState('error', `
+              <div class=\"flex items-center justify-center h-full\">
+                <div class=\"text-center\">
+                  <div class=\"text-red-400 text-sm\">${message}</div>
+                </div>
+              </div>
+            `);
+          } catch (_) {}
+          try {
+            const now = Date.now ? Date.now() : new Date().getTime();
+            if (!lastChartTypeToastAt || (now - lastChartTypeToastAt) > 1500) {
+              showToast(message);
+              lastChartTypeToastAt = now;
+            }
+          } catch (_) {
+            if (!lastChartTypeToastAt) {
+              try { showToast(message); } catch (_) {}
+              lastChartTypeToastAt = Date.now ? Date.now() : 1;
+            }
+          }
+        }
+
         function showToast(text) {
           const t = document.createElement('div');
           t.textContent = text;
@@ -6472,7 +6547,11 @@ ggplot(data, aes(category, value, fill = category)) +
             try {
               const code = pyCodeFromInputs();
               autoPyCode = code;
-            } catch(_) {
+            } catch (err) {
+              const msg = (typeof err?.message === 'string') ? err.message : '';
+              if (msg === CHART_TYPE_REQUIRED_MESSAGE) {
+                notifyChartTypeMissing();
+              }
               autoPyCode = pyDefaultTemplate();
             }
             if (typeof monacoEditor !== 'undefined' && monacoEditor) { monacoEditor.setValue(autoPyCode); }
@@ -6484,7 +6563,11 @@ ggplot(data, aes(category, value, fill = category)) +
             try {
               const code = rCodeFromInputs();
               autoRCode = code;
-            } catch(_) {
+            } catch (err) {
+              const msg = (typeof err?.message === 'string') ? err.message : '';
+              if (msg === CHART_TYPE_REQUIRED_MESSAGE) {
+                notifyChartTypeMissing();
+              }
               autoRCode = rDefaultTemplate();
             }
             if (typeof monacoEditor !== 'undefined' && monacoEditor) { monacoEditor.setValue(autoRCode); }
