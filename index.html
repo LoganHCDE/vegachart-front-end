@@ -5663,7 +5663,7 @@ ggplot(data, aes(category, value, fill = category)) +
             setChartDisplayState('loading', `Executing ${language} code...`);
 
             // Make request to Flask backend
-            const response = await fetch('https://vega-chart-9cee83c4aa24.herokuapp.com/api/generate-chart', {
+            const response = await fetch('https://api.vegachart.com/generate-chart', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
