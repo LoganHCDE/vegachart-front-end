@@ -2316,7 +2316,7 @@ ggplot(data, aes(category, value, fill = category)) +
             ta.placeholder = (lang === 'Python')
               ? "# Python (Seaborn)\n# Write or paste your code here."
               : (lang === 'R')
-                ? "# R (ggplot2)\n# Write or paste your code here."
+                ? "# R (ggplot2) — runs in-browser via webR\n# Write or paste your code here."
                 : '';
             ta.value = text || '';
             container.appendChild(ta);
@@ -2409,10 +2409,16 @@ ggplot(data, aes(category, value, fill = category)) +
           // Refresh code preview for the newly selected language
           if (selectedLang === 'Python') {
             tryUpdatePythonCodePreview();
+            import('./pyodide-chart.mjs')
+              .then((m) => (typeof m.warmUpPyodide === 'function' ? m.warmUpPyodide() : undefined))
+              .catch(() => {});
           } else if (selectedLang === 'JavaScript') {
             tryUpdateJSCodePreview();
           } else if (selectedLang === 'R') {
             tryUpdateRCodePreview();
+            import('./webr-chart.mjs')
+              .then((m) => (typeof m.warmUpWebR === 'function' ? m.warmUpWebR() : undefined))
+              .catch(() => {});
           }
         });
       });
@@ -4134,7 +4140,7 @@ ggplot(data, aes(category, value, fill = category)) +
           const suggested = (window.VC_LAST_FILE && window.VC_LAST_FILE.name) ? window.VC_LAST_FILE.name : 'your_data.csv';
           return [
             '# Python (Seaborn)',
-            '# pip install seaborn matplotlib pandas',
+            '# Charts run in your browser (Pyodide loads seaborn, matplotlib, pandas)',
             'import seaborn as sns',
             'import matplotlib.pyplot as plt',
             'import pandas as pd',
@@ -4288,7 +4294,7 @@ ggplot(data, aes(category, value, fill = category)) +
 
           const lines = [];
           lines.push('# Python (Seaborn)');
-          lines.push('# pip install seaborn matplotlib pandas');
+          lines.push('# Charts run in your browser (Pyodide loads seaborn, matplotlib, pandas)');
           lines.push('import seaborn as sns');
           lines.push('import matplotlib.pyplot as plt');
           lines.push('import matplotlib.colors as mcolors');
@@ -4688,16 +4694,13 @@ ggplot(data, aes(category, value, fill = category)) +
         function rDefaultTemplate() {
           const suggested = (window.VC_LAST_FILE && window.VC_LAST_FILE.name) ? window.VC_LAST_FILE.name : 'your_data.csv';
           return [
-            '# R (ggplot2)',
-            '# --- Backend wrapper (executed but not shown) ---',
-            '# Loads: library(ggplot2); if installed: library(dplyr), library(readr)',
-            '# If you do not assign p, the last ggplot you create is used via ggplot2::last_plot().',
-            '# After your code, the server applies a theme and saves using:',
-            '#   p <- p + theme(plot.background = element_rect(fill = "#0a0a0a", color = NA),',
-            '#                    plot.margin = margin(t = 20, r = 25, b = 55, l = 15))',
-            '#   ggsave(filename = "<temp>.png", plot = p, device = "png", width = 6.4, height = 4.8, units = "in", dpi = 150, bg = "#0a0a0a", limitsize = FALSE)',
+            '# R (ggplot2) — runs in your browser via webR (WASM)',
+            '# --- Automatic setup (injected before this script) ---',
+            '# Loads the tidyverse (ggplot2, dplyr, readr, tidyr, …); uploaded CSV becomes data.frame df.',
+            '# Figures use the canvas device; print your ggplot as usual.',
+            '# Theme/margins follow the controls in Advanced → Image / Chart Background.',
             '# ------------------------------------------------',
-            '# install.packages(c("ggplot2", "dplyr", "readr", "tidyr"))  # if running locally',
+            '# Offline install not needed here (packages download once per browser session).',
             'library(ggplot2)',
             'if (requireNamespace("readr", quietly = TRUE)) library(readr)',
             'if (requireNamespace("dplyr", quietly = TRUE)) library(dplyr)',
@@ -4709,7 +4712,7 @@ ggplot(data, aes(category, value, fill = category)) +
             '# Keep a consistent baseline theme',
             'theme_set(theme_minimal())',
             '',
-            '# Always assign your plot to `p` so the backend can save it',
+            '# Always assign your plot to `p`; the app captures printed graphics',
             'if (exists("df") && is.data.frame(df)) {',
             '  cols <- names(df)',
             '  non_empty <- cols[vapply(cols, function(.c) any(!is.na(df[[.c]]) & df[[.c]] != ""), logical(1))]',
@@ -4945,7 +4948,7 @@ ggplot(data, aes(category, value, fill = category)) +
           const lines = [];
           const prePlotLines = [];
           // User-facing header
-          lines.push('# R (ggplot2)');
+          lines.push('# R (ggplot2) — webR in-browser');
           lines.push('# Tip: Upload a CSV or use your own data frame named df.');
           lines.push('# Start below: modify aesthetics, geometry, and theme as needed.');
           lines.push('# (You do not need to manually save the plot.)');
@@ -5653,88 +5656,97 @@ ggplot(data, aes(category, value, fill = category)) +
           try { document.getElementById('chart-placeholder')?.classList.add('hidden'); } catch(_) {}
         }
 
-        // Backend communication function for Python/R code execution
-        async function executeCodeOnBackend(language, code) {
+        // Run R + ggplot2 in the browser via webR (WASM)
+        async function executeRInBrowser(code) {
           const chartDiv = document.getElementById('chartCanvas');
           if (!chartDiv) throw new Error('Chart canvas not found');
-
           try {
-            // Set loading state
-            setChartDisplayState('loading', `Executing ${language} code...`);
-
-            // Make request to Flask backend
-            const response = await fetch('https://api.vegachart.com/api/generate-chart', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                language: language.toLowerCase(),
-                code: code,
-                data: uploadedData || null,  // Send parsed CSV data if available
-                // Background selections for backend wrappers
-                imgBgChoice: (document.getElementById('adv-image-bg')?.value) || 'default',
-                chartBgChoice: (document.getElementById('adv-chart-bg')?.value) || 'default',
-                showGridLines: !!document.getElementById('adv-grid-toggle')?.checked,
-                // Legacy field for backward compatibility
-                bgChoice: (document.getElementById('adv-image-bg')?.value) || 'default'
-              })
+            const imgBgChoice = (document.getElementById('adv-image-bg')?.value) || 'default';
+            let csvText = null;
+            if (uploadedData && Array.isArray(uploadedData) && uploadedData.length > 0) {
+              csvText = (typeof uploadedDataCSV === 'string' && uploadedDataCSV.length)
+                ? uploadedDataCSV
+                : convertDataToCSV(uploadedData);
+            }
+            const { runRCapture } = await import('./webr-chart.mjs');
+            const result = await runRCapture({
+              code,
+              csvText,
+              imageBgChoice: imgBgChoice,
+              onStatus: (msg) => setChartDisplayState('loading', msg),
             });
-
-            if (response.ok) {
-              // Success: response is a PNG image
-              const blob = await response.blob();
-              const imageUrl = URL.createObjectURL(blob);
-              try { window.VC_BACKEND_IMAGE_BLOB = blob; } catch(_) {}
-              
-              // Set success state and add the image
-              setChartDisplayState('success');
-              
-              const img = document.createElement('img');
-              img.src = imageUrl;
-              img.style.width = '100%';
-              img.style.height = '100%';
-              img.style.objectFit = 'contain';
-              img.alt = `${language} generated chart`;
-              
-              // Clean up the object URL when the image loads
-              img.onload = () => {
-                URL.revokeObjectURL(imageUrl);
-              };
-              
-              chartDiv.appendChild(img);
-              
-            } else {
-              // Error: response is JSON with error message
-              const errorData = await response.json();
-              const errorMessage = errorData.error || 'Unknown error occurred';
-              
-              // Set error state with formatted message
-              setChartDisplayState('error', `
+            if (!result || !result.ok || !result.canvas) {
+              throw new Error('R did not return a plot');
+            }
+            setChartDisplayState('success');
+            chartDiv.innerHTML = '';
+            const cv = result.canvas;
+            cv.setAttribute('role', 'img');
+            cv.setAttribute('aria-label', 'R generated chart');
+            cv.style.width = '100%';
+            cv.style.height = '100%';
+            cv.style.objectFit = 'contain';
+            chartDiv.appendChild(cv);
+            try { window.VC_BACKEND_IMAGE_BLOB = result.blob; } catch (_) {}
+          } catch (error) {
+            const errorMessage = (error && error.message) ? String(error.message) : String(error);
+            setChartDisplayState('error', `
                 <div class="flex items-center justify-center h-full">
                   <div class="text-center max-w-md px-4">
-                    <div class="text-red-400 text-lg mb-2">⚠ Code Execution Error</div>
+                    <div class="text-red-400 text-lg mb-2">⚠ R / webR Error</div>
                     <pre class="text-red-300 text-sm bg-red-900/20 p-3 rounded border border-red-600/30 text-left whitespace-pre-wrap">${errorMessage}</pre>
-                    <p class="text-gray-400 text-xs mt-2">Check your ${language} code for syntax errors or missing dependencies.</p>
+                    <p class="text-gray-400 text-xs mt-2">Check your R code, or try again after the R runtime finishes loading.</p>
                   </div>
                 </div>
               `);
-            }
+          }
+        }
 
+        // Run Python + Seaborn in the browser via Pyodide (WASM)
+        async function executePythonInBrowser(code) {
+          const chartDiv = document.getElementById('chartCanvas');
+          if (!chartDiv) throw new Error('Chart canvas not found');
+          try {
+            let csvText = null;
+            if (uploadedData && Array.isArray(uploadedData) && uploadedData.length > 0) {
+              csvText = (typeof uploadedDataCSV === 'string' && uploadedDataCSV.length)
+                ? uploadedDataCSV
+                : convertDataToCSV(uploadedData);
+            }
+            const suggestedFilename = (window.VC_LAST_FILE && window.VC_LAST_FILE.name)
+              ? window.VC_LAST_FILE.name
+              : 'your_data.csv';
+            const { runPythonCapture } = await import('./pyodide-chart.mjs');
+            const result = await runPythonCapture({
+              code,
+              csvText,
+              suggestedFilename,
+              onStatus: (msg) => setChartDisplayState('loading', msg),
+            });
+            if (!result || !result.ok || !result.canvas) {
+              throw new Error('Python did not return a plot');
+            }
+            setChartDisplayState('success');
+            chartDiv.innerHTML = '';
+            const cv = result.canvas;
+            cv.setAttribute('role', 'img');
+            cv.setAttribute('aria-label', 'Python generated chart');
+            cv.style.width = '100%';
+            cv.style.height = '100%';
+            cv.style.objectFit = 'contain';
+            chartDiv.appendChild(cv);
+            try { window.VC_BACKEND_IMAGE_BLOB = result.blob; } catch (_) {}
           } catch (error) {
-            // Network or other errors
-            const errorMessage = error.message || 'Failed to connect to backend server';
-            
-            // Set error state with network error message
+            const errorMessage = (error && error.message) ? String(error.message) : String(error);
             setChartDisplayState('error', `
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center max-w-md px-4">
-                  <div class="text-red-400 text-lg mb-2">🔌 Connection Error</div>
-                  <p class="text-red-300 text-sm bg-red-900/20 p-3 rounded border border-red-600/30">${errorMessage}</p>
-                  <p class="text-gray-400 text-xs mt-2">Make sure the Flask backend server is running on http://127.0.0.1:5000</p>
+                <div class="flex items-center justify-center h-full">
+                  <div class="text-center max-w-md px-4">
+                    <div class="text-red-400 text-lg mb-2">⚠ Python / Pyodide Error</div>
+                    <pre class="text-red-300 text-sm bg-red-900/20 p-3 rounded border border-red-600/30 text-left whitespace-pre-wrap">${errorMessage}</pre>
+                    <p class="text-gray-400 text-xs mt-2">Check your Python code, or try again after the Python runtime finishes loading (first run downloads packages).</p>
+                  </div>
                 </div>
-              </div>
-            `);
+              `);
           }
         }
 
@@ -5748,15 +5760,19 @@ ggplot(data, aes(category, value, fill = category)) +
             // Get the currently selected language
             const selectedLang = document.querySelector('.library-btn.active')?.dataset.lang;
             
-            // Handle Python and R code execution via backend
+            // Python: Pyodide (browser, WASM)  |  R: webR (browser, WASM)
             if (selectedLang === 'Python' || selectedLang === 'R') {
-              // Immediately reflect executing state and remove any previous chart
-              setChartDisplayState('loading', `Executing ${selectedLang} code...`);
-              // Get code from Monaco editor
+              setChartDisplayState(
+                'loading',
+                selectedLang === 'R'
+                  ? 'Starting R runtime…'
+                  : selectedLang === 'Python'
+                    ? 'Starting Python runtime…'
+                    : `Executing ${selectedLang} code...`
+              );
               const code = monacoEditor ? monacoEditor.getValue() : '';
               
               if (!code || !code.trim()) {
-                // revert to placeholder only if nothing was previously shown
                 setChartDisplayState('error', `
                   <div class="flex items-center justify-center h-full">
                     <div class="text-center max-w-md px-4">
@@ -5768,9 +5784,12 @@ ggplot(data, aes(category, value, fill = category)) +
                 showToast(`Please enter ${selectedLang} code in the editor`);
                 return;
               }
-              
-              // Execute code on backend
-              await executeCodeOnBackend(selectedLang, code);
+
+              if (selectedLang === 'R') {
+                await executeRInBrowser(code);
+                return;
+              }
+              await executePythonInBrowser(code);
               return;
             }
             
@@ -6393,6 +6412,7 @@ ggplot(data, aes(category, value, fill = category)) +
             codeSearch.decorations = monacoEditor.deltaDecorations(codeSearch.decorations, []);
           }} catch(_) {}
         }
+        try { window.vcClearMonacoSearchDecorations = clearMonacoHighlights; } catch (_) {}
 
         function computeMatches(query) {
           const q = (query || '').trim();
@@ -6798,6 +6818,10 @@ ggplot(data, aes(category, value, fill = category)) +
     </script>
     <script>
       // Dynamically adjust code output height to align columns by showing more/less lines
+      /** Prevents adjustCodeOutputHeight ↔ adjustCodeFiller feedback loops (Monaco stack overflow / marker errors). */
+      let vcAdjustCodeOutputDepth = 0;
+      const VC_MAX_FILLER_LINES = 120;
+
       function adjustCodeFiller() {
         try {
           const host = document.querySelector('#code-output-container .code-host');
@@ -6808,6 +6832,11 @@ ggplot(data, aes(category, value, fill = category)) +
             const editor = window.monacoEditor;
             const model = editor.getModel && editor.getModel();
             if (!model) return;
+            try {
+              if (typeof window.vcClearMonacoSearchDecorations === 'function') {
+                window.vcClearMonacoSearchDecorations();
+              }
+            } catch (_) {}
             // Determine line height from editor options or fallback
             let lineH = 18;
             try {
@@ -6828,7 +6857,8 @@ ggplot(data, aes(category, value, fill = category)) +
             let viewportHeight = 0;
             try { viewportHeight = editor.getLayoutInfo().height; } catch(_) { viewportHeight = host.clientHeight; }
             const diffPx = Math.round(viewportHeight - lastBottom);
-            const desired = diffPx > 6 ? Math.max(0, Math.ceil(diffPx / lineH)) : 0;
+            const rawDesired = diffPx > 6 ? Math.max(0, Math.ceil(diffPx / lineH)) : 0;
+            const desired = Math.min(rawDesired, VC_MAX_FILLER_LINES);
 
             // Count trailing blank lines
             let trailing = 0;
@@ -6898,6 +6928,8 @@ ggplot(data, aes(category, value, fill = category)) +
       }
 
   function adjustCodeOutputHeight() {
+        if (vcAdjustCodeOutputDepth > 0) return;
+        vcAdjustCodeOutputDepth++;
         try {
           const left = document.getElementById('left-col');
           const right = document.getElementById('right-col');
@@ -6940,7 +6972,10 @@ ggplot(data, aes(category, value, fill = category)) +
           if (window.monacoEditor) window.monacoEditor.layout();
           // After sizing, add filler lines if needed so the editor shows numbered blanks, not empty space
           adjustCodeFiller();
-        } catch(_) {}
+        } catch (_) {
+        } finally {
+          vcAdjustCodeOutputDepth--;
+        }
       }
 
       // Recalculate on load/resize and when collapsing sections
@@ -6952,7 +6987,7 @@ ggplot(data, aes(category, value, fill = category)) +
           setTimeout(adjustCodeOutputHeight, 520);
         }
       });
-      // Also re-run after short delay to catch async layout shifts
+          // Also re-run after short delay to catch async layout shifts
       setTimeout(adjustCodeOutputHeight, 300);
 
       // Observe size changes in columns/code component for reactive adjustment
